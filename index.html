@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maple Spec Manager v1.6</title>
+<title>Maple Spec Manager v1.7</title>
 <style>
 :root{
   --bg:#f5f7fb;--panel:#fff;--text:#202533;--muted:#7a8292;
@@ -142,7 +142,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="logo">MAPLE SPEC MANAGER <span class="version-badge">v1.5</span><small>메이플스토리 스펙업 관리</small></div>
+    <div class="logo">MAPLE SPEC MANAGER <span class="version-badge">v1.7</span><small>메이플스토리 스펙업 관리</small></div>
     <div class="save-indicator" id="saveIndicator">자동 저장됨</div>
   </div>
   <nav class="nav">
@@ -155,7 +155,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 
 <main>
 <section id="dashboard" class="page active">
-  <div class="page-title"><div><h1>대시보드 <span class="page-version">v1.5</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
+  <div class="page-title"><div><h1>대시보드 <span class="page-version">v1.7</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
   <div class="grid stats">
     <div class="card"><div class="stat-label">캐릭터</div><div class="stat-number" id="statChars">12</div></div>
     <div class="card"><div class="stat-label">전체 스펙업 평균 진행도</div><div class="stat-number" id="statProgress">0%</div></div>
@@ -243,7 +243,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
   </div>
 </div>
 
-<footer>Maple Spec Manager v1.6 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
+<footer>Maple Spec Manager v1.7 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
 
 <script>
 const SPEC_GROUPS = [
@@ -423,7 +423,7 @@ function characterCard(c){
   const info=(data.characterInfo||{})[c]||{};
   const profile=characterImageMarkup(info.image,"char");
   const meta=[info.job||"", info.level!=null?`Lv. ${esc(info.level)}`:""].filter(Boolean).join(" · ");
-  return `<div class="card char-card" data-character="${esc(c)}" role="button" tabindex="0" aria-label="${esc(c)} 상세 보기" onclick="openCharacterPopup(this.dataset.character)" onkeydown="handleCharacterCardKeydown(event, this)">
+  return `<div class="card char-card" data-character="${esc(c)}" role="button" tabindex="0" aria-label="${esc(c)} 상세 보기">
     <div class="row" style="align-items:flex-start">
       <div style="display:flex;gap:12px;align-items:center">${profile}<div><div class="char-name">${esc(c)}</div><div class="char-sub">${esc(meta||"GMS 캐릭터")}</div></div></div>
       <span class="badge">${active}개 활성</span>
@@ -446,7 +446,17 @@ function renderDashboard(){
   const emptyHtml='<div class="empty" style="grid-column:1/-1">등록된 캐릭터가 없습니다.<br><br><strong>👤 캐릭터 관리 → + 캐릭터 추가</strong>에서 닉네임을 입력해주세요.</div>';
   document.getElementById("dashboardCharacters").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
   document.getElementById("characterCards").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
-  // 캐릭터 카드 클릭은 전역 이벤트 위임으로 상세 팝업을 엽니다.
+  // 캐릭터 카드에 직접 이벤트를 연결합니다. (CSP에서 inline onclick이 차단되어도 동작)
+  document.querySelectorAll(".char-card").forEach(card=>{
+    const open=()=>openCharacterPopup(card.dataset.character);
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", e=>{
+      if(e.key==="Enter" || e.key===" "){
+        e.preventDefault();
+        open();
+      }
+    });
+  });
   document.querySelectorAll(".delete-character").forEach(btn=>{
     btn.onclick=(e)=>{
       e.stopPropagation();
