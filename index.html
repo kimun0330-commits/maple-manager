@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maple Spec Manager</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #f4f6fb;
+      color: #202533;
+    }
+    header {
+      background: #1f2430;
+      color: white;
+      padding: 28px 20px;
+    }
+    header h1 { margin: 0 0 8px; font-size: 28px; }
+    header p { margin: 0; color: #cfd5e2; }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 50px;
+    }
+    .welcome {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+    .welcome h2 { margin-top: 0; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+    .card h3 { margin: 0 0 10px; }
+    .number {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .progress {
+      height: 12px;
+      background: #e7eaf0;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 35%;
+      background: #667eea;
+    }
+    .notice {
+      margin-top: 20px;
+      padding: 16px;
+      background: #eef1ff;
+      border-radius: 12px;
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      color: #858c9b;
+      padding: 20px;
+      font-size: 13px;
+    }
+    @media (max-width: 700px) {
+      .cards { grid-template-columns: 1fr; }
+      header h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MAPLE SPEC MANAGER</h1>
+  <p>메이플스토리 캐릭터 스펙업 관리</p>
+</header>
+
+<main>
+  <section class="welcome">
+    <h2>🎮 나의 스펙업 대시보드</h2>
+    <p>
+      GitHub Pages 홈페이지의 첫 번째 버전입니다.
+      앞으로 이곳에 12개 캐릭터의 스펙, 로드맵, 투자 기록을 추가할 예정입니다.
+    </p>
+
+    <div class="notice">
+      <strong>현재 진행 단계</strong><br>
+      홈페이지 기본 화면 만들기 완료 → 다음 단계에서 캐릭터 데이터를 연결합니다.
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3>👤 캐릭터</h3>
+      <div class="number">12</div>
+      <p>관리할 캐릭터</p>
+    </div>
+
+    <div class="card">
+      <h3>🗺️ 스펙업 로드맵</h3>
+      <div class="number">30</div>
+      <p>등록된 스펙업 계획</p>
+    </div>
+
+    <div class="card">
+      <h3>💰 투자 기록</h3>
+      <div class="number">100</div>
+      <p>등록된 투자 기록</p>
+    </div>
+  </section>
+
+  <section class="welcome" style="margin-top:20px;">
+    <h2>전체 진행도</h2>
+    <p>현재는 테스트용 진행도입니다.</p>
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+    <p style="text-align:right; margin-bottom:0;">35%</p>
+  </section>
+</main>
+
+<footer>
+  Maple Spec Manager · GitHub Pages
+</footer>
+
+</body>
+</html>
