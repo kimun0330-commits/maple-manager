@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maple Spec Manager v1.7</title>
+<title>Maple Spec Manager v1.8</title>
 <style>
 :root{
   --bg:#f5f7fb;--panel:#fff;--text:#202533;--muted:#7a8292;
@@ -142,7 +142,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="logo">MAPLE SPEC MANAGER <span class="version-badge">v1.7</span><small>메이플스토리 스펙업 관리</small></div>
+    <div class="logo">MAPLE SPEC MANAGER <span class="version-badge">v1.8</span><small>메이플스토리 스펙업 관리</small></div>
     <div class="save-indicator" id="saveIndicator">자동 저장됨</div>
   </div>
   <nav class="nav">
@@ -155,7 +155,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 
 <main>
 <section id="dashboard" class="page active">
-  <div class="page-title"><div><h1>대시보드 <span class="page-version">v1.7</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
+  <div class="page-title"><div><h1>대시보드 <span class="page-version">v1.8</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
   <div class="grid stats">
     <div class="card"><div class="stat-label">캐릭터</div><div class="stat-number" id="statChars">12</div></div>
     <div class="card"><div class="stat-label">전체 스펙업 평균 진행도</div><div class="stat-number" id="statProgress">0%</div></div>
@@ -163,7 +163,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
     <div class="card"><div class="stat-label">예상 투자액</div><div class="stat-number" id="statCost">0억</div></div>
   </div>
   <div class="card" style="margin-top:18px">
-    <div class="row"><h2 style="margin:0">캐릭터별 진행도</h2><span class="muted">카드를 누르면 상세 화면으로 이동합니다.</span></div>
+    <div class="row"><h2 style="margin:0">캐릭터별 진행도</h2><span class="muted">카드를 누르면 상세 정보 팝업이 열립니다.</span></div>
     <div id="dashboardCharacters" class="grid character-grid" style="margin-top:16px"></div>
   </div>
 </section>
@@ -243,7 +243,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
   </div>
 </div>
 
-<footer>Maple Spec Manager v1.7 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
+<footer>Maple Spec Manager v1.8 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
 
 <script>
 const SPEC_GROUPS = [
@@ -457,7 +457,21 @@ function renderDashboard(){
       }
     });
   });
-  document.querySelectorAll(".delete-character").forEach(btn=>{
+  // 최종 안전장치: 카드 자체의 클릭 이벤트가 다른 코드/요소에 의해 막혀도
+// 캡처 단계에서 캐릭터 카드를 찾아 상세 팝업을 엽니다.
+document.addEventListener("click", (e)=>{
+  const card=e.target.closest?.(".char-card");
+  if(!card) return;
+  if(e.target.closest?.(".delete-character")) return;
+  const c=card.getAttribute("data-character");
+  if(c){
+    e.preventDefault();
+    e.stopPropagation();
+    openCharacterPopup(c);
+  }
+}, true);
+
+document.querySelectorAll(".delete-character").forEach(btn=>{
     btn.onclick=(e)=>{
       e.stopPropagation();
       const c=btn.dataset.character;
