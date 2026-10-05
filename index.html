@@ -369,6 +369,28 @@ function showPage(id){
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 
+// 캐릭터 카드 클릭을 이벤트 위임으로 처리해 대시보드/캐릭터 관리 화면 모두에서
+// 동적으로 다시 렌더링된 카드도 확실하게 상세 화면으로 이동하도록 합니다.
+document.addEventListener("click",(e)=>{
+  const card=e.target.closest(".char-card");
+  if(!card || e.target.closest(".delete-character")) return;
+  const character=card.getAttribute("data-character");
+  if(character && data.characters.includes(character)){
+    e.preventDefault();
+    openCharacter(character);
+  }
+});
+document.addEventListener("keydown",(e)=>{
+  if(e.key!=="Enter" && e.key!==" ") return;
+  const card=e.target.closest(".char-card");
+  if(!card || e.target.closest(".delete-character")) return;
+  const character=card.getAttribute("data-character");
+  if(character && data.characters.includes(character)){
+    e.preventDefault();
+    openCharacter(character);
+  }
+});
+
 function proxiedCharacterImage(url){
   const raw=String(url||"").trim();
   return raw ? `https://images.weserv.nl/?url=${encodeURIComponent(raw)}` : "";
@@ -395,7 +417,7 @@ function characterCard(c){
   const info=(data.characterInfo||{})[c]||{};
   const profile=characterImageMarkup(info.image,"char");
   const meta=[info.job||"", info.level!=null?`Lv. ${esc(info.level)}`:""].filter(Boolean).join(" · ");
-  return `<div class="card char-card" data-character="${esc(c)}">
+  return `<div class="card char-card" data-character="${esc(c)}" role="button" tabindex="0" aria-label="${esc(c)} 상세 보기">
     <div class="row" style="align-items:flex-start">
       <div style="display:flex;gap:12px;align-items:center">${profile}<div><div class="char-name">${esc(c)}</div><div class="char-sub">${esc(meta||"GMS 캐릭터")}</div></div></div>
       <span class="badge">${active}개 활성</span>
@@ -418,13 +440,7 @@ function renderDashboard(){
   const emptyHtml='<div class="empty" style="grid-column:1/-1">등록된 캐릭터가 없습니다.<br><br><strong>👤 캐릭터 관리 → + 캐릭터 추가</strong>에서 닉네임을 입력해주세요.</div>';
   document.getElementById("dashboardCharacters").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
   document.getElementById("characterCards").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
-  document.querySelectorAll(".char-card").forEach(el=>{
-    el.onclick=(e)=>{
-      if(e.target.closest(".delete-character")) return;
-      const character=el.dataset.character;
-      if(character) openCharacter(character);
-    };
-  });
+  // 캐릭터 카드 이동은 아래 전역 이벤트 위임에서 처리합니다.
   document.querySelectorAll(".delete-character").forEach(btn=>{
     btn.onclick=(e)=>{
       e.stopPropagation();
