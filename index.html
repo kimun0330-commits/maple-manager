@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maple Spec Manager v1.3</title>
+<title>Maple Spec Manager v1.5</title>
 <style>
 :root{
   --bg:#f5f7fb;--panel:#fff;--text:#202533;--muted:#7a8292;
@@ -22,7 +22,13 @@ button{cursor:pointer}
 .nav button{border:0;background:transparent;color:#aeb6c7;padding:15px 18px 14px;border-bottom:3px solid transparent;white-space:nowrap;font-size:16px;font-weight:600}
 .nav button.active{color:#fff;border-bottom-color:#7b83f7}
 main{max-width:1200px;margin:auto;padding:28px 20px 60px}
-.page{display:none}.page.active{display:block}
+ .page{display:none}.page.active{display:block}
+.detail-modal.page.active{display:block;position:fixed;inset:0;z-index:100;background:rgba(20,26,40,.48);overflow:auto;padding:28px 20px 60px}
+.detail-modal.page.active > .detail-head,.detail-modal.page.active > .detail-profile,.detail-modal.page.active > .card{max-width:1200px;margin-left:auto;margin-right:auto}
+.detail-modal.page.active > .detail-head{background:var(--bg);padding:14px 16px;border-radius:14px;margin-bottom:18px}
+.detail-modal.page.active > .detail-profile{background:transparent}
+.detail-modal.page.active > .card{margin-top:18px}
+
 .page-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}
 .page-title h1{margin:0 0 6px;font-size:28px}.page-title p{margin:0;color:var(--muted)}
 .grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,1fr)}
@@ -136,7 +142,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="logo">MAPLE SPEC MANAGER <span class="version-badge">v1.3</span><small>메이플스토리 스펙업 관리</small></div>
+    <div class="logo">MAPLE SPEC MANAGER <span class="version-badge">v1.5</span><small>메이플스토리 스펙업 관리</small></div>
     <div class="save-indicator" id="saveIndicator">자동 저장됨</div>
   </div>
   <nav class="nav">
@@ -149,7 +155,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 
 <main>
 <section id="dashboard" class="page active">
-  <div class="page-title"><div><h1>대시보드 <span class="page-version">v1.3</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
+  <div class="page-title"><div><h1>대시보드 <span class="page-version">v1.5</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
   <div class="grid stats">
     <div class="card"><div class="stat-label">캐릭터</div><div class="stat-number" id="statChars">12</div></div>
     <div class="card"><div class="stat-label">전체 스펙업 평균 진행도</div><div class="stat-number" id="statProgress">0%</div></div>
@@ -170,9 +176,9 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
   <div id="characterCards" class="grid character-grid"></div>
 </section>
 
-<section id="detail" class="page">
+<section id="detail" class="page detail-modal">
   <div class="detail-head">
-    <div><button class="btn" id="backCharacters">← 캐릭터 목록</button></div>
+    <div><button class="btn" id="backCharacters">✕ 닫기</button></div>
     <div><span class="badge" id="detailProgress">0%</span></div>
   </div>
   <div class="detail-profile">
@@ -237,7 +243,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
   </div>
 </div>
 
-<footer>Maple Spec Manager v1.3 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
+<footer>Maple Spec Manager v1.5 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
 
 <script>
 const SPEC_GROUPS = [
@@ -369,26 +375,32 @@ function showPage(id){
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 
-// 캐릭터 카드 클릭을 이벤트 위임으로 처리해 대시보드/캐릭터 관리 화면 모두에서
-// 동적으로 다시 렌더링된 카드도 확실하게 상세 화면으로 이동하도록 합니다.
+// 캐릭터 카드는 페이지 이동 대신 상세 정보를 팝업으로 엽니다.
+function openCharacterPopup(c){
+  if(!c || !data.characters.includes(c)) return;
+  currentCharacter=c;
+  const info=(data.characterInfo||{})[c]||{};
+  document.getElementById("detailName").textContent=c;
+  document.getElementById("detailCharacterMeta").textContent=[info.job||"GMS 캐릭터", info.level!=null?`Lv. ${info.level}`:""].filter(Boolean).join(" · ");
+  document.getElementById("detailCharacterImage").innerHTML=characterImageMarkup(info.image,"detail");
+  renderEtc();
+  renderSpecTable();
+  document.getElementById("detail").classList.add("active");
+  document.body.style.overflow="hidden";
+}
+
 document.addEventListener("click",(e)=>{
   const card=e.target.closest(".char-card");
   if(!card || e.target.closest(".delete-character")) return;
-  const character=card.getAttribute("data-character");
-  if(character && data.characters.includes(character)){
-    e.preventDefault();
-    openCharacter(character);
-  }
+  const character=card.dataset.character;
+  if(character) openCharacterPopup(character);
 });
 document.addEventListener("keydown",(e)=>{
   if(e.key!=="Enter" && e.key!==" ") return;
   const card=e.target.closest(".char-card");
   if(!card || e.target.closest(".delete-character")) return;
-  const character=card.getAttribute("data-character");
-  if(character && data.characters.includes(character)){
-    e.preventDefault();
-    openCharacter(character);
-  }
+  const character=card.dataset.character;
+  if(character){ e.preventDefault(); openCharacterPopup(character); }
 });
 
 function proxiedCharacterImage(url){
@@ -440,7 +452,7 @@ function renderDashboard(){
   const emptyHtml='<div class="empty" style="grid-column:1/-1">등록된 캐릭터가 없습니다.<br><br><strong>👤 캐릭터 관리 → + 캐릭터 추가</strong>에서 닉네임을 입력해주세요.</div>';
   document.getElementById("dashboardCharacters").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
   document.getElementById("characterCards").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
-  // 캐릭터 카드 이동은 아래 전역 이벤트 위임에서 처리합니다.
+  // 캐릭터 카드 클릭은 전역 이벤트 위임으로 상세 팝업을 엽니다.
   document.querySelectorAll(".delete-character").forEach(btn=>{
     btn.onclick=(e)=>{
       e.stopPropagation();
@@ -456,16 +468,9 @@ function renderDashboard(){
   });
 }
 function openCharacter(c){
-  currentCharacter=c;
-  const info=(data.characterInfo||{})[c]||{};
-  document.getElementById("detailName").textContent=c;
-  document.getElementById("detailCharacterMeta").textContent=[info.job||"GMS 캐릭터", info.level!=null?`Lv. ${info.level}`:""].filter(Boolean).join(" · ");
-  const imageBox=document.getElementById("detailCharacterImage");
-  imageBox.innerHTML=characterImageMarkup(info.image,"detail");
-  renderEtc();
-  renderSpecTable();
-  showPage("detail");
+  openCharacterPopup(c);
 }
+
 function renderEtc(){
   const c=currentCharacter, obj=data.specs[c]||{};
   const items=["심볼","헥사","어빌리티","기타"];
@@ -583,7 +588,10 @@ function renderSpecTable(){
     };
   });
 }
-document.getElementById("backCharacters").onclick=()=>showPage("characters");
+document.getElementById("backCharacters").onclick=()=>{
+  document.getElementById("detail").classList.remove("active");
+  document.body.style.overflow="";
+};
 const lookupModal=document.getElementById("characterLookupModal");
 const lookupNickname=document.getElementById("lookupNickname");
 const lookupButton=document.getElementById("lookupButton");
