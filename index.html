@@ -18,8 +18,8 @@ button{cursor:pointer}
 .topbar-inner{max-width:1200px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{font-weight:800;letter-spacing:.5px}.logo small{display:block;color:#aeb6c7;font-size:12px;font-weight:400;margin-top:3px}
 .save-indicator{font-size:12px;color:#bfc6d5}
-.nav{max-width:1200px;margin:auto;padding:0 20px;display:flex;gap:4px;overflow:auto}
-.nav button{border:0;background:transparent;color:#aeb6c7;padding:13px 16px;border-bottom:3px solid transparent;white-space:nowrap}
+.nav{max-width:1200px;margin:auto;padding:0 20px;display:flex;gap:8px;overflow:auto}
+.nav button{border:0;background:transparent;color:#aeb6c7;padding:15px 18px 14px;border-bottom:3px solid transparent;white-space:nowrap;font-size:16px;font-weight:600}
 .nav button.active{color:#fff;border-bottom-color:#7b83f7}
 main{max-width:1200px;margin:auto;padding:28px 20px 60px}
 .page{display:none}.page.active{display:block}
@@ -33,7 +33,9 @@ main{max-width:1200px;margin:auto;padding:28px 20px 60px}
 .char-name{font-size:17px;font-weight:700;margin-bottom:8px}.char-sub{font-size:12px;color:var(--muted)}
 .char-profile-image{width:68px;height:68px;object-fit:contain;border-radius:12px;background:#f3f5f9;display:block}
 .char-profile-fallback{width:68px;height:68px;border-radius:12px;background:#f3f5f9;display:flex;align-items:center;justify-content:center;font-size:28px}
-.char-card .delete-character{padding:5px 8px;font-size:11px;border-radius:8px}
+.char-card .delete-character{padding:5px 8px;font-size:11px;border-radius:8px;transition:.15s}
+.char-card .delete-character:hover{background:var(--danger);border-color:var(--danger);color:#fff;box-shadow:0 3px 8px rgba(229,83,83,.22)}
+.char-card .delete-character:focus-visible{outline:2px solid rgba(229,83,83,.35);outline-offset:2px}
 .progress{height:9px;background:#e9ecf3;border-radius:99px;overflow:hidden;margin:12px 0 7px}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}
 .row{display:flex;justify-content:space-between;gap:12px;align-items:center}
@@ -103,7 +105,7 @@ input,select{min-height:38px}.wide{width:100%}
 .empty{padding:40px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #d8dde7;border-radius:14px}
 .roadmap-list,.record-list{display:grid;gap:10px}
 .item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}
-.item-grid{display:grid;grid-template-columns:55px 1fr 120px 110px 100px;gap:12px;align-items:center}
+.item-grid{display:grid;grid-template-columns:50px minmax(320px,1fr) 150px 130px 120px;gap:12px;align-items:center}.item-grid input,.item-grid select{min-width:0}
 .item input,.item select{width:100%}
 footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 @media(max-width:900px){
@@ -418,8 +420,9 @@ function renderDashboard(){
   document.getElementById("characterCards").innerHTML=data.characters.length ? data.characters.map(characterCard).join("") : emptyHtml;
   document.querySelectorAll(".char-card").forEach(el=>{
     el.onclick=(e)=>{
-      if(e.target.classList.contains("delete-character")) return;
-      openCharacter(el.dataset.character);
+      if(e.target.closest(".delete-character")) return;
+      const character=el.dataset.character;
+      if(character) openCharacter(character);
     };
   });
   document.querySelectorAll(".delete-character").forEach(btn=>{
@@ -727,7 +730,7 @@ function renderRoadmap(){
       <strong>#${i+1}</strong>
       <input data-r="title" data-i="${i}" value="${esc(x.title)}" placeholder="스펙업 목표를 입력하세요">
       <select data-r="character" data-i="${i}"><option value="">대상 캐릭터를 선택하세요</option>${data.characters.map(c=>`<option ${x.character===c?"selected":""}>${esc(c)}</option>`).join("")}</select>
-      <input type="number" min="0" step="0.1" data-r="cost" data-i="${i}" value="${esc(x.cost)}" placeholder="예상 비용(억)">
+      <input type="number" min="0" step="0.1" data-r="cost" data-i="${i}" value="${esc(x.cost)}" placeholder="예상 비용 (억)">
       <select data-r="status" data-i="${i}">${["","진행중","완료","보류"].map(v=>`<option value="${esc(v)}" ${x.status===v?"selected":""}>${v||"상태 선택"}</option>`).join("")}</select>
     </div>
     <div style="display:flex;gap:8px;margin-top:10px">
