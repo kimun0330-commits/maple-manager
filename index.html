@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maple Spec Manager v1.5</title>
+<title>Maple Spec Manager v1.6</title>
 <style>
 :root{
   --bg:#f5f7fb;--panel:#fff;--text:#202533;--muted:#7a8292;
@@ -243,7 +243,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
   </div>
 </div>
 
-<footer>Maple Spec Manager v1.5 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
+<footer>Maple Spec Manager v1.6 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
 
 <script>
 const SPEC_GROUPS = [
@@ -376,6 +376,7 @@ function showPage(id){
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 
 // 캐릭터 카드는 페이지 이동 대신 상세 정보를 팝업으로 엽니다.
+// 카드 자체에 직접 onclick을 연결해 렌더링 후에도 클릭이 확실히 동작하도록 합니다.
 function openCharacterPopup(c){
   if(!c || !data.characters.includes(c)) return;
   currentCharacter=c;
@@ -389,19 +390,12 @@ function openCharacterPopup(c){
   document.body.style.overflow="hidden";
 }
 
-document.addEventListener("click",(e)=>{
-  const card=e.target.closest(".char-card");
-  if(!card || e.target.closest(".delete-character")) return;
-  const character=card.dataset.character;
-  if(character) openCharacterPopup(character);
-});
-document.addEventListener("keydown",(e)=>{
-  if(e.key!=="Enter" && e.key!==" ") return;
-  const card=e.target.closest(".char-card");
-  if(!card || e.target.closest(".delete-character")) return;
-  const character=card.dataset.character;
-  if(character){ e.preventDefault(); openCharacterPopup(character); }
-});
+function handleCharacterCardKeydown(event, card){
+  if(event.key!=="Enter" && event.key!==" ") return;
+  event.preventDefault();
+  openCharacterPopup(card.dataset.character);
+}
+
 
 function proxiedCharacterImage(url){
   const raw=String(url||"").trim();
@@ -429,7 +423,7 @@ function characterCard(c){
   const info=(data.characterInfo||{})[c]||{};
   const profile=characterImageMarkup(info.image,"char");
   const meta=[info.job||"", info.level!=null?`Lv. ${esc(info.level)}`:""].filter(Boolean).join(" · ");
-  return `<div class="card char-card" data-character="${esc(c)}" role="button" tabindex="0" aria-label="${esc(c)} 상세 보기">
+  return `<div class="card char-card" data-character="${esc(c)}" role="button" tabindex="0" aria-label="${esc(c)} 상세 보기" onclick="openCharacterPopup(this.dataset.character)" onkeydown="handleCharacterCardKeydown(event, this)">
     <div class="row" style="align-items:flex-start">
       <div style="display:flex;gap:12px;align-items:center">${profile}<div><div class="char-name">${esc(c)}</div><div class="char-sub">${esc(meta||"GMS 캐릭터")}</div></div></div>
       <span class="badge">${active}개 활성</span>
@@ -438,7 +432,7 @@ function characterCard(c){
     <div class="row"><span class="char-sub">스펙업 진행도</span><strong>${p}%</strong></div>
     <div class="row" style="margin-top:7px"><span class="char-sub">${counts.done}/${counts.running}</span><span></span></div>
     <div class="card-actions">
-      <button class="btn danger delete-character" data-character="${esc(c)}">삭제</button>
+      <button type="button" class="btn danger delete-character" data-character="${esc(c)}" onclick="event.stopPropagation()">삭제</button>
     </div>
   </div>`;
 }
