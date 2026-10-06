@@ -538,6 +538,22 @@ document.addEventListener("click", (e)=>{
   }
 }, true);
 
+document.querySelectorAll(".character-include-toggle").forEach(toggle=>{
+  toggle.onchange=(e)=>{
+    e.stopPropagation();
+    const c=toggle.dataset.character;
+    if(!c) return;
+    data.characterInfo[c]=data.characterInfo[c]||{};
+    data.characterInfo[c].specInclude=toggle.checked;
+    saveData();
+    renderDashboard();
+    if(currentCharacter===c && document.getElementById("characterPopup")?.classList.contains("open")){
+      renderEtc();
+      renderSpecTable();
+    }
+  };
+});
+
 document.querySelectorAll(".delete-character").forEach(btn=>{
     btn.onclick=(e)=>{
       e.stopPropagation();
