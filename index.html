@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maple Spec Manager v3.1.4</title>
+<title>Maple Spec Manager v3.1.5</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Jua&family=Nunito:wght@700;800;900&display=swap');
 :root{
@@ -139,7 +139,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 }
 
 
-/* v3.1.4 장비창 UI */
+/* v3.1.5 장비창 UI */
 .equipment-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,.75fr);gap:18px;align-items:start}
 .equipment-board{background:linear-gradient(145deg,#eef1f7,#f8f9fc);border:1px solid #dfe3eb;border-radius:18px;padding:18px;box-shadow:var(--shadow)}
 .equipment-board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
@@ -167,7 +167,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 .editor-block{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}.editor-label{font-size:12px;font-weight:800;margin-bottom:10px;color:#515a69}.editor-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.editor-column{background:#f8f9fc;border-radius:11px;padding:11px}.editor-column-title{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px}
 .choice-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.choice-btn{border:1px solid #dfe3ea;background:#fff;border-radius:9px;padding:9px 4px;font-size:11px;font-weight:700;color:#5d6676}.choice-btn:hover{border-color:#aab0ff}.choice-btn.active{background:#eef0ff;border-color:#5865f2;color:#4d59c8;box-shadow:0 0 0 1px rgba(88,101,242,.12)}
 .star-select{width:100%;font-weight:700}.editor-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.editor-field label{display:block;font-size:11px;color:var(--muted);font-weight:800;margin-bottom:6px}.editor-field input,.editor-field select{width:100%}
-/* v3.1.4 무기/보조무기/엠블렘 전용 입력창 */
+/* v3.1.5 무기/보조무기/엠블렘 전용 입력창 */
 .special-editor-box{width:min(470px,100%);background:#1f2838;color:#fff;border-radius:3px;padding:14px;box-shadow:0 24px 70px rgba(0,0,0,.4)}
 .special-editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.special-editor-head h2{margin:0;font-size:18px}.special-editor-close{border:0;background:transparent;color:#dbe3ef;font-size:18px;cursor:pointer}
 .star-row{display:flex;flex-wrap:wrap;gap:2px;align-items:center;padding:8px 8px 6px;background:#263246;border-radius:4px;margin-bottom:10px}.star-btn{border:0;background:transparent;color:#4c596c;padding:0 1px;font-size:13px;line-height:1;cursor:pointer}.star-btn.active{color:#ffd900;text-shadow:0 0 2px rgba(255,217,0,.55)}
@@ -192,13 +192,13 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 .lookup-status.error{color:var(--danger)}
 
 
-/* v3.1.4 입력 최적화 2차: 게임 장비창형 현재/목표 UI */
+/* v3.1.5 입력 최적화 2차: 게임 장비창형 현재/목표 UI */
  .equip-dual-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
 .equip-state-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
 .equip-state-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.equip-state-title{font-family:"Jua","Malgun Gothic",sans-serif;font-size:23px;font-weight:400}.equip-state-hint{font-size:11px;color:var(--muted)}
 .equip-slot-rows{display:flex;justify-content:center}.game-equipment-stage{position:relative;width:min(430px,100%);aspect-ratio:430/276;margin:0 auto;overflow:hidden;border-radius:3px;background:#eee}.game-equipment-stage>img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
 .game-slot-hit{position:absolute;left:var(--x);top:var(--y);width:9.77%;height:15.22%;padding:0;margin:0;border:0;background:transparent;border-radius:4px;cursor:pointer;z-index:3}
-/* v3.1.4 잠재능력별 장비 슬롯 테두리 */
+/* v3.1.5 잠재능력별 장비 슬롯 테두리 */
 .game-slot-hit.potential-none{border:0;box-shadow:none}
 .game-slot-hit.potential-레어{border:2px solid #65c7ff;box-shadow:0 0 0 1px rgba(101,199,255,.22)}
 .game-slot-hit.potential-에픽{border:2px solid #a879ff;box-shadow:0 0 0 1px rgba(168,121,255,.22)}
@@ -230,126 +230,121 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 @media(max-width:1250px){.equip-state-body{grid-template-columns:minmax(220px,1fr) 360px}.equip-image-area,.equip-slot-rows,.game-equipment-stage,.game-equipment-stage>img{width:360px}.game-equipment-stage,.game-equipment-stage>img{height:auto;aspect-ratio:430/276}.inline-editor-area{height:420px}}
 @media(max-width:900px){.detail-profile.page.active>.detail-profile,.detail-modal.page.active>.detail-profile{grid-template-columns:1fr;width:96vw}.detail-profile-main{border-radius:0 0 12px 12px}.detail-character-card{border-radius:12px 12px 0 0}.equip-dual-layout{grid-template-columns:1fr}.equip-state-body{grid-template-columns:1fr}.equip-image-area,.equip-slot-rows,.game-equipment-stage,.game-equipment-stage>img{max-width:100%;width:430px;margin:auto}.game-equipment-stage{height:276px}.inline-editor-area{height:300px}.ability-dual{gap:10px}}
 
-/* v3.1.4: detail profile breathing room */
+
+/* v3.1.5 최종 UI 정리: 사용자 샘플 기준 */
+.detail-modal.page.active{
+  padding:14px 10px 30px;
+  background:rgba(25,29,42,.50);
+}
 .detail-modal.page.active > .detail-profile{
-  margin-bottom:18px;
+  width:min(1120px,96vw);
+  margin:0 auto 22px;
+  display:grid;
+  grid-template-columns:210px 1fr;
+  gap:0;
+  align-items:stretch;
 }
 .detail-modal.page.active > .detail-profile .detail-character-card{
-  min-height:276px;
+  min-height:260px;
   padding:18px 14px;
-}
-.detail-modal.page.active > .detail-profile .detail-profile-main{
-  padding:16px 16px 18px;
-}
-.detail-modal.page.active > .detail-profile .ability-dual{
-  gap:26px;
-  margin-bottom:12px;
-}
-.detail-modal.page.active > .detail-profile .ability-head{
-  margin-bottom:7px;
-}
-.detail-modal.page.active > .detail-profile .equip-memo-row{
-  margin-top:10px;
-}
-.detail-modal.page.active > .equip-dual-layout{
-  margin-top:18px;
-}
-@media(max-width:900px){
-  .detail-modal.page.active > .detail-profile .detail-character-card{min-height:240px}
-  .detail-modal.page.active > .detail-profile .ability-dual{gap:14px;margin-bottom:10px}
-}
-/* v3.1.4: 사용자 샘플 기준 2차 레이아웃 정리 */
-.detail-modal.page.active > .detail-profile{
-  width:min(1280px,96vw);
-  margin-bottom:20px;
-}
-.detail-modal.page.active > .detail-profile .detail-character-card{
-  min-height:292px;
-  padding:20px 16px;
+  border-radius:12px 0 0 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 .detail-modal.page.active > .detail-profile .detail-character-image{
-  width:190px;
-  height:175px;
+  width:170px;
+  height:165px;
+  margin:0 auto 4px;
 }
+.detail-modal.page.active > .detail-profile .detail-profile-name{font-size:22px;margin-top:0}
 .detail-modal.page.active > .detail-profile .detail-profile-main{
-  padding:18px 20px 20px;
+  min-height:260px;
+  padding:14px 16px 16px;
+  border-radius:0 12px 12px 0;
+  display:flex;
+  flex-direction:column;
 }
-.detail-modal.page.active > .detail-profile .ability-dual{
-  gap:30px;
-  margin-bottom:14px;
+.detail-modal.page.active > .detail-profile .ability-dual{gap:18px;margin:0 0 12px}
+.detail-modal.page.active > .detail-profile .ability-head{margin-bottom:5px}
+.detail-modal.page.active > .detail-profile .ability-head h3{font-size:12px}
+.detail-modal.page.active > .detail-profile .ability-head span{font-size:7px}
+.detail-modal.page.active > .detail-profile .ability-lines{gap:4px}
+.detail-modal.page.active > .detail-profile .ability-line{
+  border-radius:0;min-height:25px;padding:6px 8px;font-size:9px;background-image:none !important;
 }
-.detail-modal.page.active > .detail-profile .ability-lines{
-  gap:4px;
-}
-.detail-modal.page.active > .detail-profile .ability-line.legendary{background:#a4ca09}
-.detail-modal.page.active > .detail-profile .ability-line.unique{background:#f0a900}
+.detail-modal.page.active > .detail-profile .ability-line.legendary{background:#a4ca09 !important}
+.detail-modal.page.active > .detail-profile .ability-line.unique{background:#f0a900 !important}
+.detail-modal.page.active > .detail-profile .ability-presets{border-radius:0;margin-top:4px;padding:4px 6px;height:21px}
+.detail-modal.page.active > .detail-profile .equip-memo-row{margin-top:auto}
+.detail-modal.page.active > .detail-profile .memo-card{padding-top:7px}
+.detail-modal.page.active > .detail-profile .memo-card .character-memo{height:34px;min-height:34px}
+
 .detail-modal.page.active > .equip-dual-layout{
-  margin-top:20px;
+  width:min(1280px,96vw);max-width:none;margin:0 auto;grid-template-columns:1fr 1fr;gap:14px;
 }
+.detail-modal.page.active .equip-state-panel{min-height:430px;padding:10px;border-radius:10px}
+.detail-modal.page.active .equip-state-head{margin-bottom:8px}
+.detail-modal.page.active .equip-state-title{font-size:18px;font-weight:900}
+.detail-modal.page.active .equip-state-hint{font-size:7px}
 .detail-modal.page.active .equip-state-body{
-  grid-template-columns:220px minmax(0,1fr);
-  gap:14px;
+  display:grid;grid-template-columns:180px minmax(0,1fr);gap:12px;align-items:start;
 }
 .detail-modal.page.active .inline-editor-area{
-  width:220px;
-  height:390px;
-  justify-self:start;
+  width:180px;height:276px;box-sizing:border-box;border:1px solid #d7dbe4;border-radius:8px;background:#fff;
+  align-items:flex-start;justify-content:stretch;
 }
+.detail-modal.page.active .inline-editor-placeholder{width:100%;padding:28px 12px;font-size:12px;line-height:1.65;box-sizing:border-box}
 .detail-modal.page.active .equip-image-area,
 .detail-modal.page.active .equip-slot-rows,
 .detail-modal.page.active .game-equipment-stage,
-.detail-modal.page.active .game-equipment-stage>img{
-  width:520px;
-}
+.detail-modal.page.active .game-equipment-stage>img{width:430px;max-width:100%}
 .detail-modal.page.active .game-equipment-stage,
-.detail-modal.page.active .game-equipment-stage>img{
-  height:334px;
+.detail-modal.page.active .game-equipment-stage>img{height:276px}
+.detail-modal.page.active .equip-state-body > .inline-editor-area{order:1}
+.detail-modal.page.active .equip-state-body > .equip-image-area{order:2}
+
+.detail-modal.page.active .game-slot-hit.potential-레전더리{
+  border:2px solid #b8e51b;
+  box-shadow:0 0 0 1px rgba(184,229,27,.35),0 0 7px rgba(184,229,27,.18);
 }
-/* 심볼 합성 영역: 실제 심볼 이미지와 입력창이 겹치지 않도록 숫자 영역만 덮습니다. */
-.detail-modal.page.active .symbol-card-cover{
-  width:43px;
-  height:24px;
-  background:rgba(100,105,174,.98);
-  border-radius:5px;
-}
-.detail-modal.page.active .symbol-card-cover.s1,
-.detail-modal.page.active .symbol-card-cover.s2,
-.detail-modal.page.active .symbol-card-cover.s3{top:136px}
-.detail-modal.page.active .symbol-card-cover.s4,
-.detail-modal.page.active .symbol-card-cover.s5,
-.detail-modal.page.active .symbol-card-cover.s6{top:220px}
-.detail-modal.page.active .symbol-card-cover input{
-  width:24px;
-  font-size:11px;
-  line-height:1;
-}
-.detail-modal.page.active .symbol-card-cover span{font-size:10px}
-@media(max-width:1250px){
-  .detail-modal.page.active .equip-state-body{grid-template-columns:210px minmax(0,1fr)}
-  .detail-modal.page.active .inline-editor-area{width:210px}
-  .detail-modal.page.active .equip-image-area,
-  .detail-modal.page.active .equip-slot-rows,
-  .detail-modal.page.active .game-equipment-stage,
-  .detail-modal.page.active .game-equipment-stage>img{width:360px}
-  .detail-modal.page.active .game-equipment-stage,
-  .detail-modal.page.active .game-equipment-stage>img{height:auto;aspect-ratio:430/276}
+
+.detail-modal.page.active .symbol-ui-overlay{transform:none}
+.detail-modal.page.active .symbol-card-cover{width:40px;height:20px;background:rgba(100,105,174,.96);border-radius:4px}
+.detail-modal.page.active .symbol-card-cover.s1{left:264px;top:137px}
+.detail-modal.page.active .symbol-card-cover.s2{left:321px;top:137px}
+.detail-modal.page.active .symbol-card-cover.s3{left:378px;top:137px}
+.detail-modal.page.active .symbol-card-cover.s4{left:264px;top:218px}
+.detail-modal.page.active .symbol-card-cover.s5{left:321px;top:218px}
+.detail-modal.page.active .symbol-card-cover.s6{left:378px;top:218px}
+.detail-modal.page.active .symbol-card-cover span{font-size:9px}
+.detail-modal.page.active .symbol-card-cover input{width:20px;font-size:10px}
+
+@media(max-width:1280px){
+  .detail-modal.page.active .equip-state-body{grid-template-columns:170px minmax(0,1fr)}
+  .detail-modal.page.active .equip-image-area,.detail-modal.page.active .equip-slot-rows,
+  .detail-modal.page.active .game-equipment-stage,.detail-modal.page.active .game-equipment-stage>img{width:min(430px,100%)}
 }
 @media(max-width:900px){
-  .detail-modal.page.active > .detail-profile .detail-character-card{min-height:250px}
+  .detail-modal.page.active > .detail-profile{grid-template-columns:1fr;width:96vw}
+  .detail-modal.page.active > .detail-profile .detail-character-card{border-radius:12px 12px 0 0;min-height:220px}
+  .detail-modal.page.active > .detail-profile .detail-profile-main{border-radius:0 0 12px 12px;min-height:0}
+  .detail-modal.page.active > .equip-dual-layout{grid-template-columns:1fr;width:96vw}
+  .detail-modal.page.active .equip-state-body{grid-template-columns:170px minmax(0,1fr)}
+}
+@media(max-width:680px){
   .detail-modal.page.active .equip-state-body{grid-template-columns:1fr}
-  .detail-modal.page.active .inline-editor-area{width:100%;height:300px}
-  .detail-modal.page.active .equip-image-area,
-  .detail-modal.page.active .equip-slot-rows,
-  .detail-modal.page.active .game-equipment-stage,
-  .detail-modal.page.active .game-equipment-stage>img{width:430px;max-width:100%;margin:auto}
-  .detail-modal.page.active .game-equipment-stage{height:276px}
+  .detail-modal.page.active .inline-editor-area{width:100%;height:230px}
+  .detail-modal.page.active .equip-image-area,.detail-modal.page.active .equip-slot-rows,
+  .detail-modal.page.active .game-equipment-stage,.detail-modal.page.active .game-equipment-stage>img{width:430px;max-width:100%;height:auto;aspect-ratio:430/276}
 }
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="logo"><span>MAPLE SPEC MANAGER</span><span class="version-badge">v3.1.4</span><small>메이플스토리 스펙업 관리</small></div>
+    <div class="logo"><span>MAPLE SPEC MANAGER</span><span class="version-badge">v3.1.5</span><small>메이플스토리 스펙업 관리</small></div>
     <div class="save-indicator" id="saveIndicator">자동 저장됨</div>
   </div>
   <nav class="nav">
@@ -360,7 +355,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
 
 <main>
 <section id="dashboard" class="page active">
-  <div class="page-title"><div><h1>대시보드 <span class="page-version">v3.1.4</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
+  <div class="page-title"><div><h1>대시보드 <span class="page-version">v3.1.5</span></h1><p><span id="dashboardDescription">등록된 캐릭터의 스펙업 현황을 한눈에 확인합니다.</span></p></div></div>
   <div class="grid stats">
     <div class="card"><div class="stat-label">캐릭터</div><div class="stat-number" id="statChars">12</div></div>
     <div class="card"><div class="stat-label">전체 스펙업 완료율</div><div class="stat-number" id="statProgress">0%</div></div>
@@ -499,7 +494,7 @@ footer{text-align:center;color:#8b93a2;font-size:12px;padding:20px}
   </div>
 </div>
 
-<footer>Maple Spec Manager v3.1.4 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
+<footer>Maple Spec Manager v3.1.5 · 데이터는 현재 브라우저의 localStorage에 저장됩니다.</footer>
 
 <script>
 const SPEC_GROUPS = [
@@ -1078,7 +1073,8 @@ function closeEquipmentEditor(side=currentEquipmentEdit.side){
 function collectSpecialLines(root){return [0,1,2].map(i=>({option:root.querySelector(`[data-special-option="${i}"]`)?.value||"",value:(root.querySelector(`[data-special-value="${i}"]`)?.value||"").replace(/\D/g,"").slice(0,3)}));}
 function saveSpecialEquipmentEditor(){
   const {item,side}=currentEquipmentEdit; if(!currentCharacter||!item)return;
-  data.specs[currentCharacter]=data.specs[currentCharacter]||{}; const x=normalizedSpec(data.specs[currentCharacter][item]); const target=side==="target"; const root=document.getElementById("specialEditorContent");
+  data.specs[currentCharacter]=data.specs[currentCharacter]||{}; const x=normalizedSpec(data.specs[currentCharacter][item]); const target=side==="target"; const root=getInlineEditorRoot(side);
+  if(!root) return;
   const pot=document.getElementById("specialPotential").value; const star=Math.min(22,Math.max(0,Number(document.getElementById("specialStarNumber").value||0)));
   if(target){x.targetPotential=pot;x.targetStarforce=star?String(star):"";x.targetLines=collectSpecialLines(root);}else{x.currentPotential=pot;x.currentStarforce=star?String(star):"";x.currentLines=collectSpecialLines(root);}
   x.status=equipmentStatus(x); data.specs[currentCharacter][item]=x; saveData(); closeEquipmentEditor(); renderSpecTable();
