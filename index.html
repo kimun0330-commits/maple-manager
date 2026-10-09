@@ -157,12 +157,19 @@
     e.preventDefault(); const name = $('remoteName').value.trim(); if (!name) return;
     const btn = $('remoteSearchBtn'); btn.disabled=true; btn.textContent='검색 중…'; $('remoteResults').innerHTML=''; $('remoteStatus').textContent='GMS 공개 랭킹 데이터를 조회하고 있어요.';
     try {
-      const params = new URLSearchParams({type:'overall',id:'na',reboot_index:'0',page_index:'1',character_name:name});
+      // 기존 MapleStory 사이트에서 사용하던 Worker 엔드포인트 형식 재사용
+      // Worker는 루트/?url=...가 아니라 /character?nickname=...을 처리합니다.
+      const params = new URLSearchParams({type:'overall',id:'weekly',reboot_index:'0',page_index:'1',character_name:name});
       const target = `https://www.nexon.com/api/maplestory/no-auth/ranking/v2/na?${params.toString()}`;
-      const url = settings.proxyUrl ? `${settings.proxyUrl}${settings.proxyUrl.includes('?')?'&':'?'}url=${encodeURIComponent(target)}` : target;
+      const url = settings.proxyUrl
+        ? `${settings.proxyUrl.replace(/\/$/,'')}/character?nickname=${encodeURIComponent(name)}`
+        : target;
       const response = await fetch(url,{headers:{'Accept':'application/json'}});
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
+      const responseText = await response.text();
+      let data;
+      try { data = JSON.parse(responseText); }
+      catch { throw new Error(`JSON 응답이 아닙니다 (HTTP ${response.status}).`); }
+      if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
       const rows = normalizeRemote(data,name);
       if (!rows.length) { $('remoteStatus').textContent='검색 결과가 없어요. 닉네임을 확인하거나 월드/랭킹에 표시되는 캐릭터인지 확인해 주세요.'; $('remoteResults').innerHTML='<div class="remote-empty">일치하는 캐릭터를 찾지 못했습니다.</div>'; }
       else { $('remoteStatus').textContent=`${rows.length}개 결과를 찾았어요. 목록에 추가할 캐릭터를 선택하세요.`; $('remoteResults').innerHTML=rows.map((c,i)=>`<div class="remote-item">${iconAvatar(c)}<div class="remote-details"><strong>${escapeHtml(c.name)}</strong><span>${escapeHtml(c.job||'직업 정보 없음')} · Lv. ${escapeHtml(c.level||'—')} · ${escapeHtml(c.world||'월드 정보 없음')}</span></div><button class="btn primary small" data-add-remote="${i}">추가</button></div>`).join('');
@@ -175,9 +182,38 @@
     } finally { btn.disabled=false; btn.textContent='검색'; }
   });
   function normalizeRemote(data, requestedName) {
-    let rows = data?.ranking || data?.ranks || data?.data || data?.result || data?.characters || [];
-    if (!Array.isArray(rows)) rows = Array.isArray(rows?.ranking) ? rows.ranking : Array.isArray(rows?.data) ? rows.data : [];
-    return rows.map(row => ({name:row.character_name||row.name||row.characterName||'',job:row.class_name||row.job||row.character_class||row.className||'',level:row.level||row.character_level||row.characterLevel||'',world:row.world_name||row.world||row.worldName||'기타',guild:row.guild_name||row.guild||'',image:row.character_image||row.character_img||row.image||row.characterImage||'',source:'gms'})).filter(c=>c.name).sort((a,b)=>(a.name.toLowerCase()===requestedName.toLowerCase()?-1:0)-(b.name.toLowerCase()===requestedName.toLowerCase()?-1:0)).slice(0,10);
+    const candidates = [];
+    const seen = new Set();
+    const add = value => {
+      if (value == null) return;
+      if (Array.isArray(value)) { value.forEach(add); return; }
+      if (typeof value !== 'object' || seen.has(value)) return;
+      seen.add(value);
+      const keys = Object.keys(value);
+      if (keys.some(k => /character_name|characterName|nickname|character_level|character_class|job_name|class_name/i.test(k))) candidates.push(value);
+      Object.values(value).forEach(child => {
+        if (Array.isArray(child) || (child && typeof child === 'object')) add(child);
+      });
+    };
+    add(data);
+    const get = (row, keys) => {
+      for (const key of keys) if (row[key] !== undefined && row[key] !== null && row[key] !== '') return row[key];
+      return '';
+    };
+    const mapped = candidates.map(row => ({
+      name:String(get(row,['character_name','characterName','name','nickname','char_name']) || requestedName),
+      job:String(get(row,['character_class','characterClass','job_name','class_name','job','class','character_job']) || '직업 정보 없음'),
+      level:get(row,['character_level','characterLevel','level']) || '',
+      world:String(get(row,['world_name','world','worldName']) || '기타'),
+      guild:String(get(row,['guild_name','guild']) || ''),
+      image:String(get(row,['character_image','characterImage','characterImgURL','characterImageURL','image_url','character_image_url','character_img','image']) || ''),
+      source:'gms'
+    }));
+    const unique = new Map();
+    mapped.forEach(c => { const key = `${c.name.toLowerCase()}|${c.world.toLowerCase()}`; if (!unique.has(key)) unique.set(key,c); });
+    return [...unique.values()]
+      .sort((a,b) => Number(b.name.toLowerCase()===requestedName.toLowerCase()) - Number(a.name.toLowerCase()===requestedName.toLowerCase()))
+      .slice(0,10);
   }
 
   load(); render();
