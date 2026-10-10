@@ -78,7 +78,7 @@
 .arc-tab.active{background:#fff;color:#4d568f}
 .arc-heading{font-size:11px;font-weight:800;padding:0 2px}
 .arc-value{font-size:11px;color:#fff;opacity:.9;padding:0 2px}
-.arc-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.arc-total{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:12px;color:var(--muted)}.arc-total strong{font-size:13px;color:var(--text)}.arc-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
 .arc-slot{min-width:0;min-height:64px;border:1px solid #b7bee6;border-radius:7px;background:#747cbb;color:#fff;padding:4px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .arc-slot .gear-glyph{font-size:18px}
 .arc-slot .gear-label{color:#fff;font-size:8px}
@@ -109,7 +109,7 @@
 <body>
 <div class="app" id="appRoot">
   <header class="topbar">
-    <div class="brand"><div class="brand-mark">M</div><div>Maple Desk <span class="version-badge">v0.0.17</span><small>GLOBAL MAPLESTORY</small></div></div>
+    <div class="brand"><div class="brand-mark">M</div><div>Maple Desk <span class="version-badge">v0.0.20</span><small>GLOBAL MAPLESTORY</small></div></div>
     <div class="top-right"><div class="save-status"><span class="dot"></span><span id="saveLabel">자동 저장 준비됨</span></div><button class="btn small subtle" id="settingsBtn">⚙ 설정</button></div>
   </header>
   <main class="container">
@@ -133,7 +133,7 @@
 
 
 <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><div class="modal wide"><div class="modal-head"><div><h2 id="detailTitle">캐릭터 상세 설정</h2><p>현재 장비와 목표 장비를 비교하고 성장 계획을 관리하세요.</p></div><button class="close-btn" data-close="detailModal" aria-label="닫기">×</button></div><div class="modal-body" id="detailBody"></div><div class="modal-foot"><button class="btn danger" id="deleteCharacterBtn">캐릭터 삭제</button><button class="btn" data-close="detailModal">닫기</button></div></div></div>
-<div class="modal-backdrop" id="gearEditModal" role="dialog" aria-modal="true" aria-labelledby="gearEditTitle"><div class="modal"><div class="modal-head"><div><h2 id="gearEditTitle">장비 설정</h2><p>현재 상태와 목표 상태를 따로 기록할 수 있어요.</p></div><button class="close-btn" id="gearEditClose" aria-label="닫기">×</button></div><div class="modal-body"><div class="gear-edit-preview"><div class="gear-glyph" id="gearEditGlyph">◇</div><div><strong id="gearEditSlotName">장비 슬롯</strong><span id="gearEditStateLabel">현재 상태</span></div></div><form id="gearEditForm"><div class="form-grid"><div class="field full"><div class="setting-section"><div class="setting-section-title">스타포스</div><div class="starforce-picker" id="starforcePicker" role="group" aria-label="스타포스 1~30성"></div><div class="starforce-controls"><div class="starforce-caption" id="starforceCaption">0성</div><button type="button" class="btn small subtle" id="starforceReset">스타포스 초기화</button></div><input id="gearStarforce" type="hidden" value="0"></div></div><div class="field full"><div class="setting-section"><div class="setting-section-title">잠재능력</div><div class="field"><label>등급</label><div class="potential-grade-row" id="potentialGradeChoices" role="group" aria-label="잠재능력 등급"><button type="button" class="potential-grade-chip" data-grade="레전더리" aria-pressed="false">레전더리</button><button type="button" class="potential-grade-chip" data-grade="유니크" aria-pressed="false">유니크</button><button type="button" class="potential-grade-chip" data-grade="에픽" aria-pressed="false">에픽</button><button type="button" class="potential-grade-chip" data-grade="레어" aria-pressed="false">레어</button><button type="button" class="potential-grade-chip" data-grade="없음" aria-pressed="false">없음</button></div><input id="gearPotentialGrade" type="hidden" value=""></div><div class="field"><label>옵션 설정</label><div class="potential-options"><div class="potential-option-row"><select id="gearPotentialStat1" aria-label="잠재능력 1 능력치"><option value="">선택 안 함</option><option>STR</option><option>DEX</option><option>INT</option><option>LUK</option><option>올스탯</option><option>공격력</option><option>마력</option><option>보스 데미지</option><option>데미지</option><option>크리티컬 데미지</option><option>최대 HP</option></select><input id="gearPotentialValue1" type="number" min="0" max="999" aria-label="잠재능력 1 수치" placeholder="수치"><span class="potential-unit">%</span></div><div class="potential-option-row"><select id="gearPotentialStat2" aria-label="잠재능력 2 능력치"><option value="">선택 안 함</option><option>STR</option><option>DEX</option><option>INT</option><option>LUK</option><option>올스탯</option><option>공격력</option><option>마력</option><option>보스 데미지</option><option>데미지</option><option>크리티컬 데미지</option><option>최대 HP</option></select><input id="gearPotentialValue2" type="number" min="0" max="999" aria-label="잠재능력 2 수치" placeholder="수치"><span class="potential-unit">%</span></div><div class="potential-option-row"><select id="gearPotentialStat3" aria-label="잠재능력 3 능력치"><option value="">선택 안 함</option><option>STR</option><option>DEX</option><option>INT</option><option>LUK</option><option>올스탯</option><option>공격력</option><option>마력</option><option>보스 데미지</option><option>데미지</option><option>크리티컬 데미지</option><option>최대 HP</option></select><input id="gearPotentialValue3" type="number" min="0" max="999" aria-label="잠재능력 3 수치" placeholder="수치"><span class="potential-unit">%</span></div></div></div><div class="field"><label>미리보기</label><div class="potential-preview" id="potentialPreview"><div class="potential-preview-title">■ <span id="potentialPreviewLabel">Potential</span> : <span id="potentialPreviewGrade">—</span></div><div id="potentialPreviewLines"></div></div></div></div></div><div class="field full"><label for="gearItemMemo">메모</label><input id="gearItemMemo" maxlength="140" placeholder="추가 메모"></div></div><div class="modal-hint">입력한 정보는 이 브라우저에 자동 저장됩니다.</div><div class="modal-foot" style="padding:16px 0 0"><button type="button" class="btn" id="gearEditCancel">취소</button><button type="submit" class="btn primary">저장</button></div></form></div></div></div>
+<div class="modal-backdrop" id="gearEditModal" role="dialog" aria-modal="true" aria-labelledby="gearEditTitle"><div class="modal"><div class="modal-head"><div><h2 id="gearEditTitle">장비 설정</h2><p>현재 상태와 목표 상태를 따로 기록할 수 있어요.</p></div><button class="close-btn" id="gearEditClose" aria-label="닫기">×</button></div><div class="modal-body"><div class="gear-edit-preview"><div class="gear-glyph" id="gearEditGlyph">◇</div><div><strong id="gearEditSlotName">장비 슬롯</strong><span id="gearEditStateLabel">현재 상태</span></div></div><form id="gearEditForm"><div class="form-grid"><div class="field full hidden" id="symbolLevelSection"><div class="setting-section"><div class="setting-section-title">심볼 레벨</div><div class="starforce-picker" id="symbolLevelPicker" role="group" aria-label="심볼 레벨 1~20"></div><div class="starforce-controls"><div class="starforce-caption" id="symbolLevelCaption">레벨 미설정</div><button type="button" class="btn small subtle" id="symbolLevelReset">레벨 초기화</button></div><input id="gearSymbolLevel" type="hidden" value="0"></div></div><div id="regularGearSettings" class="field full"><div class="setting-section"><div class="setting-section-title">스타포스</div><div class="starforce-picker" id="starforcePicker" role="group" aria-label="스타포스 1~30성"></div><div class="starforce-controls"><div class="starforce-caption" id="starforceCaption">0성</div><button type="button" class="btn small subtle" id="starforceReset">스타포스 초기화</button></div><input id="gearStarforce" type="hidden" value="0"></div></div><div id="regularPotentialSettings" class="field full"><div class="setting-section"><div class="setting-section-title">잠재능력</div><div class="field"><label>등급</label><div class="potential-grade-row" id="potentialGradeChoices" role="group" aria-label="잠재능력 등급"><button type="button" class="potential-grade-chip" data-grade="레전더리" aria-pressed="false">레전더리</button><button type="button" class="potential-grade-chip" data-grade="유니크" aria-pressed="false">유니크</button><button type="button" class="potential-grade-chip" data-grade="에픽" aria-pressed="false">에픽</button><button type="button" class="potential-grade-chip" data-grade="레어" aria-pressed="false">레어</button><button type="button" class="potential-grade-chip" data-grade="없음" aria-pressed="false">없음</button></div><input id="gearPotentialGrade" type="hidden" value=""></div><div class="field"><label>옵션 설정</label><div class="potential-options"><div class="potential-option-row"><select id="gearPotentialStat1" aria-label="잠재능력 1 능력치"><option value="">선택 안 함</option><option>STR</option><option>DEX</option><option>INT</option><option>LUK</option><option>올스탯</option><option>공격력</option><option>마력</option><option>보스 데미지</option><option>데미지</option><option>크리티컬 데미지</option><option>최대 HP</option></select><input id="gearPotentialValue1" type="number" min="0" max="999" aria-label="잠재능력 1 수치" placeholder="수치"><span class="potential-unit">%</span></div><div class="potential-option-row"><select id="gearPotentialStat2" aria-label="잠재능력 2 능력치"><option value="">선택 안 함</option><option>STR</option><option>DEX</option><option>INT</option><option>LUK</option><option>올스탯</option><option>공격력</option><option>마력</option><option>보스 데미지</option><option>데미지</option><option>크리티컬 데미지</option><option>최대 HP</option></select><input id="gearPotentialValue2" type="number" min="0" max="999" aria-label="잠재능력 2 수치" placeholder="수치"><span class="potential-unit">%</span></div><div class="potential-option-row"><select id="gearPotentialStat3" aria-label="잠재능력 3 능력치"><option value="">선택 안 함</option><option>STR</option><option>DEX</option><option>INT</option><option>LUK</option><option>올스탯</option><option>공격력</option><option>마력</option><option>보스 데미지</option><option>데미지</option><option>크리티컬 데미지</option><option>최대 HP</option></select><input id="gearPotentialValue3" type="number" min="0" max="999" aria-label="잠재능력 3 수치" placeholder="수치"><span class="potential-unit">%</span></div></div></div><div class="field"><label>미리보기</label><div class="potential-preview" id="potentialPreview"><div class="potential-preview-title">■ <span id="potentialPreviewLabel">Potential</span> : <span id="potentialPreviewGrade">—</span></div><div id="potentialPreviewLines"></div></div></div></div></div></div><div id="gearMemoSection" class="field full"><label for="gearItemMemo">메모</label><input id="gearItemMemo" maxlength="140" placeholder="추가 메모"></div></div><div class="modal-hint">입력한 정보는 이 브라우저에 자동 저장됩니다.</div><div class="modal-foot" style="padding:16px 0 0"><button type="button" class="btn" id="gearEditCancel">취소</button><button type="submit" class="btn primary">저장</button></div></form></div></div></div>
 
 <div class="modal-backdrop" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle"><div class="modal wide"><div class="modal-head"><div><h2 id="searchModalTitle">GMS 캐릭터 검색</h2><p>닉네임으로 공개 랭킹 데이터를 검색합니다.</p></div><button class="close-btn" data-close="searchModal" aria-label="닫기">×</button></div><div class="modal-body"><div class="notice"><strong>안내</strong> · GMS는 KMS처럼 공개된 공식 Open API를 제공하지 않아 공개 랭킹 조회를 사용합니다. 검색 가능한 캐릭터/필드는 제한될 수 있습니다.</div><form id="remoteSearchForm"><div class="settings-row"><input id="remoteName" class="filter" required maxlength="32" placeholder="찾을 캐릭터 닉네임" aria-label="GMS 닉네임"><button class="btn primary" id="remoteSearchBtn" type="submit">검색</button></div></form><div class="modal-status" id="remoteStatus">닉네임을 입력하고 검색을 눌러주세요.</div><div class="remote-results" id="remoteResults" style="margin-top:13px"></div><div class="modal-hint">검색이 실패하면 설정에서 Cloudflare Worker 프록시 주소를 등록하거나, GMS 공식 사이트에서 캐릭터를 확인할 수 있습니다.</div></div><div class="modal-foot"><button class="btn" id="openGmsBtn">GMS 홈페이지 열기 ↗</button><button class="btn" data-close="searchModal">닫기</button></div></div></div>
 
@@ -229,8 +229,8 @@
     const glyph = item.glyph || slot.glyph;
     const optionSummary=[1,2,3].map(i=>item['potentialStat'+i]?`${item['potentialStat'+i]} +${item['potentialValue'+i]||0}%`: '').filter(Boolean)[0] || '';
     const detail = [Number(item.starforce)>0?`${Number(item.starforce)}성`:'',item.potentialGrade,optionSummary].filter(Boolean).join(' · ');
-    const hasItem = Number(item.starforce)>0 || !!(item.potentialGrade || item.potentialStat1 || item.potentialStat2 || item.potentialStat3 || item.memo || item.grade);
-    return `<button type="button" class="${arc?'arc-slot':'gear-slot'} ${hasItem?'has-item':''}" data-potential-grade="${arc?'':escapeHtml(item.potentialGrade||'')}" data-edit-gear="${slot.id}" data-gear-state="${state}" data-gear-arc="${arc?'1':'0'}" title="${escapeHtml(label)}${detail?' · '+escapeHtml(detail):''}"><span class="gear-glyph">${glyph}</span><span class="gear-label">${escapeHtml(label)}</span>${arc?`<small>${escapeHtml(item.potentialGrade || (Number(item.starforce)>0?`${Number(item.starforce)}성`:'단계 설정'))}</small>`:''}</button>`;
+    const hasItem = Number(item.starforce)>0 || Number(item.symbolLevel)>0 || !!(item.potentialGrade || item.potentialStat1 || item.potentialStat2 || item.potentialStat3 || item.memo || item.grade);
+    return `<button type="button" class="${arc?'arc-slot':'gear-slot'} ${hasItem?'has-item':''}" data-potential-grade="${arc?'':escapeHtml(item.potentialGrade||'')}" data-edit-gear="${slot.id}" data-gear-state="${state}" data-gear-arc="${arc?'1':'0'}" title="${escapeHtml(label)}${detail?' · '+escapeHtml(detail):''}"><span class="gear-glyph">${glyph}</span><span class="gear-label">${escapeHtml(label)}</span>${arc?`<small>${Number(item.symbolLevel)>0?`${Number(item.symbolLevel)}레벨`:'레벨 설정'}</small>`:''}</button>`;
   }
   function formatCost(value) {
     const n = Number(String(value).replace(/[^0-9]/g,''));
@@ -245,12 +245,14 @@
     const isSac = activeType === 'SAC';
     const prefix = isSac ? 'sac' : 'arc';
     const slots = ARC_SLOTS.map((slot,i)=>({...slot,id:`${prefix}${i+1}`,label:`${prefix.toUpperCase()} ${i+1}`}));
-    return `<div class="arc-panel"><div class="arc-tabs"><button class="arc-tab ${!isSac?'active':''}" type="button" data-arc-type="ARC" data-arc-state="${state}">ARC</button><button class="arc-tab ${isSac?'active':''}" type="button" data-arc-type="SAC" data-arc-state="${state}">SAC</button></div><div class="arc-heading">${isSac?'Sacred Symbol':'Arcane Symbol'}</div><div class="arc-value">${escapeHtml(character[isSac?(state==='current'?'sacCurrent':'sacTarget'):(state==='current'?'arcCurrent':'arcTarget')] || '레벨 미설정')}</div><div class="arc-slots">${slots.map(slot=>renderGearSlot(character,state,slot,true)).join('')}</div><button class="arc-tab" type="button" data-edit-arc-level="${state}" style="background:#59639f;border:1px solid #929bd0">레벨 / 합계 설정</button></div>`;
+    const levels = slots.map(slot=>Math.max(0,Math.min(20,Number(getGear(character,state,slot.id).symbolLevel)||0)));
+    const total = isSac ? levels.reduce((sum,level)=>sum + level*10,0) : levels.reduce((sum,level)=>sum + 20 + level*10,0) + 30;
+    return `<div class="arc-panel"><div class="arc-tabs"><button class="arc-tab ${!isSac?'active':''}" type="button" data-arc-type="ARC" data-arc-state="${state}">ARC</button><button class="arc-tab ${isSac?'active':''}" type="button" data-arc-type="SAC" data-arc-state="${state}">SAC</button></div><div class="arc-heading">${isSac?'Sacred Symbol':'Arcane Symbol'}</div><div class="arc-slots">${slots.map(slot=>renderGearSlot(character,state,slot,true)).join('')}</div><div class="arc-total"><span>${isSac?'SAC':'ARC'} 합계</span><strong>${total.toLocaleString('ko-KR')}</strong></div></div>`;
   }
   function renderEquipmentPanel(character,state) {
     const current = state === 'current';
     const gearColumns = [[...GEAR_SLOTS.slice(0,5)],[...GEAR_SLOTS.slice(5,10)],[...GEAR_SLOTS.slice(10,13)],[...GEAR_SLOTS.slice(13,17)],[...GEAR_SLOTS.slice(17,22)]];
-    return `<section class="equipment-panel"><div class="equipment-panel-head"><h3>${current?'현재 상태':'목표 상태'}</h3><span class="state-tag">${current?'CURRENT':'TARGET'}</span></div><div class="equipment-layout"><div class="gear-grid">${gearColumns.map(col=>`<div class="gear-column">${col.map(slot=>renderGearSlot(character,state,slot)).join('')}</div>`).join('')}</div>${renderArcPanel(character,state)}</div><div class="detail-edit-hint">장비 슬롯을 누르면 스타포스와 잠재 옵션을 설정할 수 있어요.</div></section>`;
+    return `<section class="equipment-panel"><div class="equipment-panel-head"><h3>${current?'현재 상태':'목표 상태'}</h3><span class="state-tag">${current?'CURRENT':'TARGET'}</span></div><div class="equipment-layout"><div class="gear-grid">${gearColumns.map(col=>`<div class="gear-column">${col.map(slot=>renderGearSlot(character,state,slot)).join('')}</div>`).join('')}</div>${renderArcPanel(character,state)}</div><div class="detail-edit-hint">일반 장비는 스타포스와 잠재능력을, 심볼은 1~20레벨을 설정할 수 있어요.</div></section>`;
   }
   function renderDetail(character) {
     ensureGearData(character);
@@ -261,7 +263,6 @@
     $('detailCharacterNote').addEventListener('input',e=>{character.note=e.target.value;character.updatedAt=new Date().toISOString();saveCharacters(false);});
     $('detailBody').querySelectorAll('[data-edit-gear]').forEach(button=>button.addEventListener('click',()=>openGearEditor(character,button.dataset.gearState,button.dataset.editGear,button.dataset.gearArc==='1')));
     $('detailBody').querySelectorAll('[data-arc-type]').forEach(button=>button.addEventListener('click',()=>{character[button.dataset.arcState==='current'?'arcTypeCurrent':'arcTypeTarget']=button.dataset.arcType;character.updatedAt=new Date().toISOString();saveCharacters();renderDetail(character);}));
-    $('detailBody').querySelectorAll('[data-edit-arc-level]').forEach(button=>button.addEventListener('click',()=>openArcLevelEditor(character,button.dataset.editArcLevel)));
   }
   function openCharacterDetails(character) {
     if (!character) return;
@@ -270,6 +271,15 @@
     renderDetail(character);
     openModal('detailModal');
   }
+  function renderSymbolLevelPicker() {
+    const picker=$('symbolLevelPicker');
+    if(!picker)return;
+    const value=Math.max(0,Math.min(20,Number($('gearSymbolLevel').value)||0));
+    picker.innerHTML=Array.from({length:20},(_,i)=>{const n=i+1;return `<button type="button" class="starforce-star ${n<=value?'active':''}" data-symbol-level="${n}" aria-label="레벨 ${n}" aria-pressed="${n===value?'true':'false'}">${n}</button>`}).join('');
+    $('symbolLevelCaption').textContent=value?`${value}레벨`:'레벨 미설정';
+    picker.querySelectorAll('[data-symbol-level]').forEach(btn=>btn.addEventListener('click',()=>{$('gearSymbolLevel').value=btn.dataset.symbolLevel;renderSymbolLevelPicker();}));
+  }
+  $('symbolLevelReset').addEventListener('click',()=>{$('gearSymbolLevel').value='0';renderSymbolLevelPicker();});
   function renderStarforcePicker() {
     const picker=$('starforcePicker');
     if(!picker)return;
@@ -298,8 +308,14 @@
     const item=getGear(character,state,slotId);
     const slot=[...GEAR_SLOTS,...ARC_SLOTS].find(x=>x.id===slotId) || {label:slotId,glyph:'◇'};
     activeGearEdit={characterId:character.id,state,slotId,isArc};
-    $('gearEditTitle').textContent=`${slot.label} 설정`;
+    $('gearEditTitle').textContent=isArc?`${slot.label} 레벨 설정`:`${slot.label} 설정`;
     $('gearEditSlotName').textContent=slot.label;
+    $('symbolLevelSection').classList.toggle('hidden',!isArc);
+    $('regularGearSettings').classList.toggle('hidden',!!isArc);
+    $('regularPotentialSettings').classList.toggle('hidden',!!isArc);
+    $('gearMemoSection').classList.toggle('hidden',!!isArc);
+    $('gearSymbolLevel').value=String(Math.max(0,Math.min(20,Number(item.symbolLevel)||0)));
+    renderSymbolLevelPicker();
     $('gearEditGlyph').textContent=item.glyph||slot.glyph;
     $('gearEditStateLabel').textContent=state==='current'?'현재 상태':'목표 상태';
     $('gearStarforce').value=String(Math.max(0,Math.min(30,Number(item.starforce)||0)));
@@ -310,25 +326,26 @@
     renderStarforcePicker();
     openModal('gearEditModal');
   }
-  function openArcLevelEditor(character,state) {
-    const arcType=character[state==='current'?'arcTypeCurrent':'arcTypeTarget']||'ARC';
-    const key=arcType==='SAC'?(state==='current'?'sacCurrent':'sacTarget'):(state==='current'?'arcCurrent':'arcTarget');
-    const value=prompt(`${arcType} 레벨 또는 합계를 입력하세요.\n예: 30레벨 / 450`,character[key]||'');
-    if(value===null)return;
-    character[key]=value.trim().slice(0,40);character.updatedAt=new Date().toISOString();saveCharacters();renderDetail(character);showToast(`${arcType} 정보가 저장됐어요.`);
-  }
   $('gearEditForm').addEventListener('submit',e=>{
     e.preventDefault();if(!activeGearEdit)return;
     const character=characters.find(c=>c.id===activeGearEdit.characterId);if(!character)return;
     ensureGearData(character);
     const bagKey=activeGearEdit.state==='current'?'gearCurrent':'gearTarget';
     const old=getGear(character,activeGearEdit.state,activeGearEdit.slotId);
-    const item={...old,starforce:Number($('gearStarforce').value)||0,potentialGrade:$('gearPotentialGrade').value,memo:$('gearItemMemo').value.trim()};
-    [1,2,3].forEach(i=>{item['potentialStat'+i]=$('gearPotentialStat'+i).value;item['potentialValue'+i]=$('gearPotentialValue'+i).value.trim();});
-    ['potential1','potential2','potential3'].forEach(k=>delete item[k]);
-    delete item.name; delete item.grade; delete item.cost;
-    if(!item.starforce&&!item.potentialGrade&&!item.potentialStat1&&!item.potentialStat2&&!item.potentialStat3&&!item.memo)delete character[bagKey][activeGearEdit.slotId];else character[bagKey][activeGearEdit.slotId]=item;
-    character.updatedAt=new Date().toISOString();saveCharacters();closeModal('gearEditModal');renderDetail(character);showToast('장비 정보가 저장됐어요.');activeGearEdit=null;
+    let item;
+    if(activeGearEdit.isArc){
+      item={...old,symbolLevel:Number($('gearSymbolLevel').value)||0};
+      delete item.starforce;delete item.potentialGrade;
+      [1,2,3].forEach(i=>{delete item['potentialStat'+i];delete item['potentialValue'+i];});
+      if(!item.symbolLevel&&!item.memo)delete character[bagKey][activeGearEdit.slotId];else character[bagKey][activeGearEdit.slotId]=item;
+    }else{
+      item={...old,starforce:Number($('gearStarforce').value)||0,potentialGrade:$('gearPotentialGrade').value,memo:$('gearItemMemo').value.trim()};
+      [1,2,3].forEach(i=>{item['potentialStat'+i]=$('gearPotentialStat'+i).value;item['potentialValue'+i]=$('gearPotentialValue'+i).value.trim();});
+      ['potential1','potential2','potential3'].forEach(k=>delete item[k]);
+      delete item.name; delete item.grade; delete item.cost;
+      if(!item.starforce&&!item.potentialGrade&&!item.potentialStat1&&!item.potentialStat2&&!item.potentialStat3&&!item.memo)delete character[bagKey][activeGearEdit.slotId];else character[bagKey][activeGearEdit.slotId]=item;
+    }
+    character.updatedAt=new Date().toISOString();saveCharacters();closeModal('gearEditModal');renderDetail(character);showToast(activeGearEdit.isArc?'심볼 레벨이 저장됐어요.':'장비 정보가 저장됐어요.');activeGearEdit=null;
   });
   function closeGearEditor(){closeModal('gearEditModal');activeGearEdit=null;}
   $('gearEditClose').addEventListener('click',closeGearEditor);$('gearEditCancel').addEventListener('click',closeGearEditor);
