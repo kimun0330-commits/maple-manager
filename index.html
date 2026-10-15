@@ -59,6 +59,7 @@
 .summary-chip{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface-2);min-width:0}
 .summary-chip span{display:block;font-size:10px;color:var(--muted);margin-bottom:3px}
 .summary-chip strong{font-size:13px;overflow-wrap:anywhere}
+.upgrade-summary{grid-column:1 / -1;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:16px;margin-bottom:12px}.upgrade-summary-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}.upgrade-summary-head h3{margin:0;font-size:16px;letter-spacing:-.3px}.upgrade-summary-head p{margin:3px 0 0;font-size:11px;color:var(--muted)}.upgrade-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.upgrade-metric{padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);min-width:0}.upgrade-metric-label{font-size:11px;color:var(--muted);margin-bottom:5px}.upgrade-metric-main{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}.upgrade-metric-main strong{font-size:18px;letter-spacing:-.4px}.upgrade-metric-main span{font-size:12px;font-weight:800;color:var(--green)}.upgrade-metric small{display:block;margin-top:4px;color:var(--muted);font-size:10px}.upgrade-grade-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.upgrade-grade-pill{font-size:10px;border:1px solid var(--line);border-radius:7px;padding:4px 7px;color:var(--muted);background:var(--surface-2)}.upgrade-grade-pill b{color:var(--text)}.upgrade-changes{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.upgrade-changes summary{font-weight:800;font-size:12px;cursor:pointer}.upgrade-change-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:9px}.upgrade-change{display:flex;justify-content:space-between;gap:8px;padding:7px 9px;background:var(--surface-2);border-radius:8px;font-size:11px;min-width:0}.upgrade-change span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.upgrade-change strong{white-space:nowrap}.upgrade-empty{font-size:11px;color:var(--muted);padding:8px 0}@media(max-width:760px){.upgrade-summary-grid{grid-template-columns:1fr}.upgrade-change-list{grid-template-columns:1fr}}
 .equipment-comparison{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
 .equipment-panel{border:1px solid var(--line);border-radius:13px;padding:12px;min-width:0;background:var(--surface)}
 .equipment-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
@@ -114,6 +115,8 @@
 @media(max-width:760px){.gear-glyph{width:32px;height:32px}.gear-icon{width:30px;height:30px}}
 
 .quick-actions{display:flex;flex-wrap:wrap;gap:7px;margin:-2px 0 12px;align-items:center}.quick-grade{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.quick-grade select{min-width:125px;max-width:100%;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px;font-size:11px}.quick-actions .btn{font-size:11px;padding:7px 9px}@media(max-width:520px){.quick-actions{gap:5px}.quick-grade{width:100%}.quick-grade select{flex:1}}
+
+.main-tabs{display:flex;gap:8px;margin:0 0 20px;padding:5px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;width:max-content;max-width:100%}.main-tab{border:0;border-radius:8px;padding:10px 18px;background:transparent;color:var(--muted);font-weight:800;cursor:pointer}.main-tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px #0001}.boss-records-view{min-height:300px}.boss-records-help{padding:0 20px 16px;color:var(--muted);font-size:12px}.boss-records-grid{display:block;padding:0 20px 20px}.boss-record-character-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}.boss-record-character-card{display:flex;align-items:center;gap:12px;text-align:left;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);color:var(--text);min-width:0}.boss-record-character-card.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);background:var(--accent-soft)}.boss-record-character-card .avatar{width:46px;height:50px;flex-basis:46px;font-size:22px}.boss-record-character-meta{min-width:0;flex:1}.boss-record-character-name{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.boss-record-character-sub{font-size:11px;color:var(--muted);margin-top:3px}.boss-record-status{font-size:10px;font-weight:800;color:var(--green);margin-top:5px}.boss-record-status.empty{color:var(--muted);padding:0;text-align:left}.boss-record-card{width:100%;min-width:0;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--surface-2)}.boss-record-image-wrap{display:flex;align-items:center;justify-content:center;min-height:220px;max-height:none;background:#10151d;overflow:auto;padding:10px}.boss-record-image{display:block;width:100%;height:auto;max-width:100%;max-height:none;object-fit:contain}.boss-record-fields{padding:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line)}.boss-record-fields label{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:8px}.boss-record-fields .boss-record-name{display:none}.boss-record-date{width:auto;min-width:155px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)}.boss-record-actions{display:flex;justify-content:flex-end;gap:8px;align-items:center;margin-left:auto}.boss-record-name{font-size:12px;overflow-wrap:anywhere;color:var(--muted)}.boss-record-empty{grid-column:1/-1;text-align:center;padding:54px 18px;color:var(--muted)}.boss-record-empty strong{display:block;color:var(--text);margin-bottom:7px}@media(max-width:600px){.boss-record-character-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}.boss-record-character-card{padding:9px;gap:8px}.boss-record-character-card .avatar{width:36px;height:40px;flex-basis:36px}.main-tabs{width:100%}.main-tab{flex:1}.boss-records-grid{padding:0 12px 14px}.boss-record-fields{gap:8px}.boss-record-fields label{flex-wrap:wrap}.boss-record-date{min-width:130px;max-width:100%}.boss-record-image-wrap{padding:4px}.boss-records-help{padding:0 12px 14px}}
 </style>
 </head>
 <body>
@@ -127,6 +130,8 @@
       <div><div class="eyebrow">YOUR MAPLE SPACE</div><h1>캐릭터를 한곳에서 관리하세요.</h1><p>GMS 공개 랭킹에서 캐릭터를 불러오고 상세 정보를 확인하세요.</p></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn" id="importBtn">↥ 데이터 불러오기</button><button class="btn" id="exportBtn">↧ 백업 내보내기</button><button class="btn primary" id="searchGmsBtn">⌕ GMS에서 캐릭터 불러오기</button></div>
     </section>
+    <nav class="main-tabs" aria-label="주요 메뉴"><button type="button" class="main-tab active" data-main-tab="characters">캐릭터 관리</button><button type="button" class="main-tab" data-main-tab="bossRecords">보스컷 기록</button></nav>
+    <div id="charactersView">
     <section class="stats" aria-label="캐릭터 통계">
       <div class="stat"><div><div class="stat-label">등록된 캐릭터</div><div class="stat-value" id="statCharacters">0</div></div><div class="stat-icon">♙</div></div>
       <div class="stat"><div><div class="stat-label">등록된 직업</div><div class="stat-value" id="statJobs">0</div></div><div class="stat-icon">✧</div></div>
@@ -137,6 +142,12 @@
       <div class="character-grid" id="characterGrid"></div>
     </section>
     <div class="footer-note"><span class="info">ⓘ</span><span>캐릭터 정보는 이 브라우저에 자동 저장됩니다. 다른 기기에서도 사용하려면 백업 파일을 내보내고 불러오세요. 캐릭터는 GMS 공개 랭킹에서만 새로 불러올 수 있으며, 카드를 누르면 상세 정보가 팝업으로 열립니다.</span></div>
+    </div>
+    <section id="bossRecordsView" class="panel boss-records-view hidden">
+      <div class="panel-head"><div><div class="panel-title">보스컷 기록</div><div class="panel-sub">환산주스텟 등 외부 사이트의 결과 화면을 이미지로 저장하세요.</div></div><div class="toolbar"><button type="button" class="btn primary" id="addBossRecordBtn">＋ 이미지 불러오기</button><input type="file" id="bossRecordFile" accept="image/*" class="hidden"></div></div>
+      <div id="bossRecordCharacterGrid" class="boss-record-character-grid" aria-label="캐릭터 선택"></div><div class="boss-records-help">캡처는 <b>Win + Shift + S</b>로 영역을 캡처한 뒤, 이 화면에서 <b>Ctrl + V</b>로 붙여넣으세요. 파일로 저장한 이미지도 불러올 수 있어요. 이미지는 이 브라우저에 저장되며 측정 날짜는 수정할 수 있어요.</div>
+      <div id="bossRecordsGrid" class="boss-records-grid"></div>
+    </section>
   </main>
 </div>
 
@@ -156,6 +167,9 @@
   const STORAGE_KEY = 'mapleDesk.characters.v1';
   const SEEDED_KEY = 'mapleDesk.testCharacterSeeded.v1';
   const SETTINGS_KEY = 'mapleDesk.settings.v1';
+  const BOSS_RECORDS_KEY = 'mapleDesk.bossCutRecords.v1';
+  let bossRecords = [];
+  let selectedBossCharacterId = ''; 
   const $ = (id) => document.getElementById(id);
   const TEST_CHARACTER = { id:'sample-gms-character', name:'MapleTestHero', job:'Night Lord', level:285, world:'Bera', note:'테스트용 캐릭터입니다. 필요하면 편하게 수정하거나 삭제하세요.', image:'', source:'sample', createdAt:new Date().toISOString(), updatedAt:new Date().toISOString() };
   let characters = [];
@@ -193,6 +207,15 @@
       saveCharacters(false);
     }
     $('proxyUrl').value = settings.proxyUrl || '';
+    bossRecords = safeParse(localStorage.getItem(BOSS_RECORDS_KEY), []);
+    if (!Array.isArray(bossRecords)) bossRecords = [];
+    // 이전 버전의 단일 기록은 첫 캐릭터에 연결해 보존합니다.
+    if (bossRecords.length && !bossRecords[0].characterId && characters.length) {
+      bossRecords = bossRecords.map(r => ({...r, characterId: characters[0].id})); saveBossRecords();
+    }
+    selectedBossCharacterId = characters[0]?.id || '';
+    renderBossCharacterOptions();
+    renderBossRecords();
   }
   function saveCharacters(showLabel = true) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(characters));
@@ -222,6 +245,110 @@
       </article>`).join('') : `<div class="empty"><div class="empty-symbol">⌕</div><strong>${characters.length ? '검색 결과가 없습니다.' : '아직 캐릭터가 없습니다.'}</strong><p>${characters.length ? '다른 닉네임이나 월드로 검색해 보세요.' : 'GMS 공개 랭킹에서 닉네임을 검색해 캐릭터를 불러오세요.'}</p><button class="btn primary" id="emptySearchBtn">⌕ GMS에서 캐릭터 불러오기</button></div>`;
     const emptySearch = $('emptySearchBtn'); if (emptySearch) emptySearch.addEventListener('click', openGmsSearch);
   }
+  function saveBossRecords() {
+    try { localStorage.setItem(BOSS_RECORDS_KEY, JSON.stringify(bossRecords)); return true; }
+    catch (e) { showToast('저장 공간이 부족해요. 이미지 크기를 줄이거나 일부 기록을 삭제해 주세요.'); return false; }
+  }
+  function formatRecordDate(value) {
+    if (!value) return '날짜 미설정';
+    const parts = value.split('-');
+    return parts.length === 3 ? `${parts[0]}.${parts[1]}.${parts[2]}` : value;
+  }
+  function renderBossCharacterOptions() {
+    const grid = $('bossRecordCharacterGrid'); if (!grid) return;
+    if (!characters.length) { grid.innerHTML = '<div class="boss-record-empty">캐릭터 관리에서 캐릭터를 먼저 등록해 주세요.</div>'; return; }
+    if (!characters.some(c => c.id === selectedBossCharacterId)) selectedBossCharacterId = characters[0].id;
+    grid.innerHTML = characters.map(c => {
+      const record = bossRecords.find(r => r.characterId === c.id);
+      const avatar = c.image || c.avatar || c.icon || '';
+      return `<button type="button" class="boss-record-character-card ${c.id === selectedBossCharacterId ? 'active' : ''}" data-boss-character="${escapeHtml(c.id)}" aria-pressed="${c.id === selectedBossCharacterId}"><span class="avatar">${avatar ? `<img src="${escapeHtml(avatar)}" alt="">` : '♙'}</span><span class="boss-record-character-meta"><span class="boss-record-character-name">${escapeHtml(c.name || '이름 없는 캐릭터')}</span><span class="boss-record-character-sub">${escapeHtml(c.job || '')}${c.level ? ' · Lv.' + escapeHtml(c.level) : ''}</span><span class="boss-record-status ${record ? '' : 'empty'}">${record ? '● 기록 있음 · ' + escapeHtml(formatRecordDate(record.date)) : '기록 없음'}</span></span></button>`;
+    }).join('');
+    grid.querySelectorAll('[data-boss-character]').forEach(button => button.addEventListener('click', () => {
+      selectedBossCharacterId = button.dataset.bossCharacter;
+      renderBossRecords();
+    }));
+  }
+  function renderBossRecords() {
+    const grid = $('bossRecordsGrid');
+    if (!grid) return;
+    renderBossCharacterOptions();
+    const record = bossRecords.find(r => r.characterId === selectedBossCharacterId);
+    const character = characters.find(c => c.id === selectedBossCharacterId);
+    if (!record) {
+      grid.innerHTML = `<div class="boss-record-empty"><strong>${escapeHtml(character?.name || '선택한 캐릭터')}의 보스컷 이미지가 없어요.</strong><p>Win + Shift + S로 캡처한 뒤 Ctrl + V를 누르거나 이미지 불러오기를 선택하세요. 캐릭터마다 이미지 한 장씩 저장됩니다.</p></div>`;
+      return;
+    }
+    grid.innerHTML = `<article class="boss-record-card" data-boss-record="${escapeHtml(record.id)}"><div class="boss-record-fields"><label for="boss-date-${escapeHtml(record.id)}">측정 날짜 <input class="boss-record-date" type="date" id="boss-date-${escapeHtml(record.id)}" data-boss-date="${escapeHtml(record.id)}" value="${escapeHtml(record.date || '')}"></label><div class="boss-record-actions"><button type="button" class="btn small danger" data-delete-boss-record="${escapeHtml(record.id)}">이미지 삭제</button></div></div><div class="boss-record-image-wrap"><img class="boss-record-image" src="${record.image}" alt="${escapeHtml(character?.name || '')} 보스컷 측정 결과 이미지"></div></article>`;
+    grid.querySelectorAll('[data-boss-date]').forEach(input => input.addEventListener('change', () => {
+      const item = bossRecords.find(r => r.id === input.dataset.bossDate); if (!item) return;
+      item.date = input.value; saveBossRecords(); renderBossRecords(); showToast('측정 날짜를 저장했어요.');
+    }));
+    grid.querySelectorAll('[data-delete-boss-record]').forEach(button => button.addEventListener('click', () => {
+      const item = bossRecords.find(r => r.id === button.dataset.deleteBossRecord); if (!item) return;
+      if (!confirm('이 캐릭터의 보스컷 기록 이미지를 삭제할까요?')) return;
+      bossRecords = bossRecords.filter(r => r.id !== item.id); saveBossRecords(); renderBossRecords(); showToast('보스컷 기록을 삭제했어요.');
+    }));
+  }
+  function switchMainTab(tab) {
+    const isBoss = tab === 'bossRecords';
+    $('charactersView').classList.toggle('hidden', isBoss);
+    $('bossRecordsView').classList.toggle('hidden', !isBoss);
+    document.querySelectorAll('[data-main-tab]').forEach(button => button.classList.toggle('active', button.dataset.mainTab === tab));
+  }
+  function loadImageAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('이미지를 읽지 못했어요.'));
+      reader.onload = () => {
+        const img = new Image();
+        img.onerror = () => reject(new Error('이미지 파일을 열 수 없어요.'));
+        img.onload = () => {
+          const maxWidth = 1800, maxHeight = 1800;
+          const scale = Math.min(1, maxWidth / img.width, maxHeight / img.height);
+          const canvas = document.createElement('canvas'); canvas.width = Math.max(1, Math.round(img.width * scale)); canvas.height = Math.max(1, Math.round(img.height * scale));
+          const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const type = file.type === 'image/png' && file.size < 900000 ? 'image/png' : 'image/jpeg';
+          resolve(canvas.toDataURL(type, 0.86));
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  $('addBossRecordBtn').addEventListener('click', () => $('bossRecordFile').click());
+  async function addBossRecordFiles(files, defaultName = '보스컷 측정 결과') {
+    const images = [...(files || [])].filter(file => file && file.type && file.type.startsWith('image/'));
+    if (!images.length) return 0;
+    let added = 0;
+    // 단일 슬롯: 새 이미지를 넣으면 기존 이미지를 교체합니다.
+    for (const file of images.slice(0,1)) {
+      try {
+        const image = await loadImageAsDataUrl(file);
+        const record = { id: makeId(), characterId: selectedBossCharacterId, name: (file.name || defaultName).replace(/\.[^.]+$/, '') || defaultName, date: new Date().toISOString().slice(0,10), image, createdAt: new Date().toISOString() };
+        const previous = bossRecords;
+        bossRecords = [...bossRecords.filter(r => r.characterId !== selectedBossCharacterId), record];
+        if (!saveBossRecords()) { bossRecords = previous; break; }
+        added++;
+      } catch (error) { showToast(error.message || '이미지를 불러오지 못했어요.'); }
+    }
+    renderBossRecords();
+    if (added) showToast('보스컷 이미지를 저장했어요.');
+    return added;
+  }
+  $('bossRecordFile').addEventListener('change', async event => {
+    await addBossRecordFiles(event.target.files);
+    event.target.value = '';
+  });
+  // Win+Shift+S로 캡처한 뒤 Ctrl+V 하면 클립보드의 이미지를 기록으로 저장합니다.
+  document.addEventListener('paste', async event => {
+    if (!document.querySelector('#bossRecordsView:not(.hidden)')) return;
+    const items = [...(event.clipboardData?.items || [])];
+    const files = items.filter(item => item.type && item.type.startsWith('image/')).map(item => item.getAsFile()).filter(Boolean);
+    if (!files.length) return;
+    event.preventDefault();
+    await addBossRecordFiles(files, '클립보드 캡처');
+  });
+  document.querySelectorAll('[data-main-tab]').forEach(button => button.addEventListener('click', () => switchMainTab(button.dataset.mainTab)));
   function showToast(message) { const el = $('toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2600); }
   function openModal(id) { $(id).classList.add('open'); document.body.style.overflow='hidden'; }
   function closeModal(id) { $(id).classList.remove('open'); if (![...document.querySelectorAll('.modal-backdrop')].some(el => el.classList.contains('open'))) document.body.style.overflow=''; }
@@ -303,6 +430,40 @@
     const gearColumns = [['ring1','ring2','ring3','ring4','belt'].map(id=>gearById[id]),['face','eye','earring','pendant1','pendant2'].map(id=>gearById[id]),['weapon','secondary','emblem'].map(id=>gearById[id]),['hat','top','bottom','shoulder'].map(id=>gearById[id]),['cape','gloves','shoes','heart'].map(id=>gearById[id])];
     return `<section class="equipment-panel"><div class="equipment-panel-head"><h3>${current?'현재 상태':'목표 상태'}</h3><span class="state-tag">${current?'CURRENT':'TARGET'}</span></div><div class="quick-actions"><button type="button" class="btn small subtle" data-reset-gear-state="${state}">장비 상태 초기화</button><div class="quick-grade"><select aria-label="전체 장비 잠재능력 등급" data-bulk-grade-select="${state}"><option value="레전더리">전체 레전더리</option><option value="유니크">전체 유니크</option><option value="에픽">전체 에픽</option><option value="레어">전체 레어</option><option value="없음">전체 없음</option></select><button type="button" class="btn small subtle" data-bulk-grade="${state}">일괄 적용</button></div>${current?'':'<button type="button" class="btn small subtle" data-copy-current-to-target>현재 상태 복사</button>'}</div><div class="equipment-layout"><div class="gear-grid">${gearColumns.map(col=>`<div class="gear-column">${col.map(slot=>renderGearSlot(character,state,slot)).join('')}</div>`).join('')}</div>${renderArcPanel(character,state)}</div><div class="detail-edit-hint">일반 장비는 스타포스와 잠재능력을, 심볼은 1~20레벨을 설정할 수 있어요.</div></section>`;
   }
+  function renderUpgradeSummary(character) {
+    const slots = GEAR_SLOTS;
+    const current = slots.map(slot => ({slot, gear:getGear(character,'current',slot.id)}));
+    const target = slots.map(slot => ({slot, gear:getGear(character,'target',slot.id)}));
+    const sfCurrent = current.reduce((sum,item)=>sum+(Number(item.gear.starforce)||0),0);
+    const sfTarget = target.reduce((sum,item)=>sum+(Number(item.gear.starforce)||0),0);
+    const sfDelta = sfTarget-sfCurrent;
+    const grades = ['레전더리','유니크','에픽','레어','없음'];
+    const gradeCounts = (items) => Object.fromEntries(grades.map(grade=>[grade,items.filter(item=>(item.gear.potentialGrade||'없음')===grade).length]));
+    const currentGrades=gradeCounts(current), targetGrades=gradeCounts(target);
+    const potentialChanged = slots.filter(slot=>{
+      const a=getGear(character,'current',slot.id), b=getGear(character,'target',slot.id);
+      return (a.potentialGrade||'없음')!==(b.potentialGrade||'없음') || [1,2,3].some(i=>(a['potentialStat'+i]||'')!==(b['potentialStat'+i]||'') || (a['potentialValue'+i]??'')!==(b['potentialValue'+i]??''));
+    });
+    const sfChanged = slots.filter(slot=>Number(getGear(character,'current',slot.id).starforce||0)!==Number(getGear(character,'target',slot.id).starforce||0));
+    const changes = slots.filter(slot=>{
+      const a=getGear(character,'current',slot.id), b=getGear(character,'target',slot.id);
+      return Number(a.starforce||0)!==Number(b.starforce||0) || (a.potentialGrade||'없음')!==(b.potentialGrade||'없음') || [1,2,3].some(i=>(a['potentialStat'+i]||'')!==(b['potentialStat'+i]||'') || (a['potentialValue'+i]??'')!==(b['potentialValue'+i]??''));
+    });
+    const deltaText = n => `${n>0?'+':''}${n}`;
+    const changeRows = changes.map(slot=>{
+      const a=getGear(character,'current',slot.id), b=getGear(character,'target',slot.id);
+      const details=[];
+      const asf=Number(a.starforce)||0, bsf=Number(b.starforce)||0;
+      if(asf!==bsf) details.push(`★ ${asf}→${bsf} (${deltaText(bsf-asf)})`);
+      const ag=a.potentialGrade||'없음', bg=b.potentialGrade||'없음';
+      if(ag!==bg) details.push(`${ag}→${bg}`);
+      const line = g => [1,2,3].map(i=>g['potentialStat'+i]?`${g['potentialStat'+i]} ${g['potentialValue'+i]||''}%`.trim():'').filter(Boolean).join(' / ');
+      const al=line(a), bl=line(b);
+      if(al!==bl && (al||bl)) details.push(`옵션: ${al||'없음'} → ${bl||'없음'}`);
+      return `<div class="upgrade-change"><span>${escapeHtml(slot.label)}</span><strong>${escapeHtml(details.join(' · '))}</strong></div>`;
+    }).join('');
+    return `<section class="upgrade-summary"><div class="upgrade-summary-head"><div><h3>현재 ↔ 목표 스펙업 비교</h3><p>목표 상태를 현재 상태와 비교한 장비별 차이입니다.</p></div><span class="state-tag">${changes.length===0?'동일':'변경 '+changes.length+'부위'}</span></div><div class="upgrade-summary-grid"><div class="upgrade-metric"><div class="upgrade-metric-label">스타포스 합계</div><div class="upgrade-metric-main"><strong>${sfCurrent}성 → ${sfTarget}성</strong><span>${deltaText(sfDelta)}성</span></div><small>일반 장비 ${sfChanged.length}부위 변경</small></div><div class="upgrade-metric"><div class="upgrade-metric-label">잠재능력 등급</div><div class="upgrade-metric-main"><strong>${potentialChanged.length}부위</strong><span>등급/옵션 변경</span></div><small>현재와 목표의 잠재능력 차이</small></div><div class="upgrade-metric"><div class="upgrade-metric-label">목표 변경 부위</div><div class="upgrade-metric-main"><strong>${changes.length} / ${slots.length}</strong><span>${changes.length===0?'차이 없음':'확인 필요'}</span></div><small>스타포스 또는 잠재능력이 다른 부위</small></div></div><div class="upgrade-grade-row">${grades.map(g=>`<span class="upgrade-grade-pill">${g} <b>${currentGrades[g]} → ${targetGrades[g]}</b></span>`).join('')}</div><details class="upgrade-changes" ${changes.length&&changes.length<=8?'open':''}><summary>부위별 상세 차이 ${changes.length}개 보기</summary><div class="upgrade-change-list">${changeRows||'<div class="upgrade-empty">현재 상태와 목표 상태가 같습니다.</div>'}</div></details></section>`;
+  }
   function renderDetail(character) {
     ensureGearData(character);
     $('detailTitle').innerHTML = `${escapeHtml(character.name || '캐릭터')} · 상세 설정 <label class="detail-title-toggle"><span>스펙업 포함</span><span class="switch"><input id="detailProgressToggle" type="checkbox" ${character.progressEnabled!==false?'checked':''}><span class="switch-track"></span></span></label>`;
@@ -316,7 +477,7 @@
       const option = options.includes(item.option) ? item.option : '';
       return `<div class="ability-row">${fixedLegendary ? '<span class="ability-grade legendary ability-grade-fixed" aria-label="레전더리">레전더리</span>' : `<select class="ability-grade ${grade==='유니크'?'unique':'epic'}" data-ability-grade="${i}" aria-label="${i+1}번째 줄 등급">${['유니크','에픽'].map(g=>`<option value="${g}" ${g===grade?'selected':''}>${g}</option>`).join('')}</select>`}<select class="ability-option ${grade==='레전더리'?'legendary':grade==='유니크'?'unique':'epic'}" data-ability-option="${i}" aria-label="${i+1}번째 줄 옵션"><option value="">옵션 선택</option>${options.map(opt=>`<option value="${escapeHtml(opt)}" ${opt===option?'selected':''}>${escapeHtml(opt)}</option>`).join('')}</select></div>`;
     }).join('');
-    $('detailBody').innerHTML = `<div class="detail-workspace"><aside class="detail-profile">${iconAvatar(character)}<div><div class="detail-name">${escapeHtml(character.name)}</div><div class="detail-job">${escapeHtml(character.job || '직업 정보 없음')}</div><div class="profile-level"><span class="profile-pill">Lv. ${escapeHtml(character.level || '—')}</span></div><button class="btn small subtle detail-refresh-btn" type="button" data-detail-refresh="${escapeHtml(character.id)}">↻ 정보 갱신</button></div></aside><section class="ability-panel"><h3>어빌리티</h3><div class="ability-rows">${abilityRows}</div><div class="detail-note-wrap"><label for="detailCharacterNote">📝 캐릭터 메모</label><textarea id="detailCharacterNote" class="detail-note" maxlength="1200" placeholder="이 캐릭터의 목표, 계획, 메모를 자유롭게 입력하세요.">${escapeHtml(character.note || '')}</textarea></div></section><div class="detail-main"><div class="equipment-comparison">${renderEquipmentPanel(character,'current')}${renderEquipmentPanel(character,'target')}</div><div class="detail-statusbar"><span>장비 및 심볼 정보는 이 브라우저에 저장됩니다.</span><span>아이콘을 눌러 편집</span></div></div></div>`;
+    $('detailBody').innerHTML = `<div class="detail-workspace"><aside class="detail-profile">${iconAvatar(character)}<div><div class="detail-name">${escapeHtml(character.name)}</div><div class="detail-job">${escapeHtml(character.job || '직업 정보 없음')}</div><div class="profile-level"><span class="profile-pill">Lv. ${escapeHtml(character.level || '—')}</span></div><button class="btn small subtle detail-refresh-btn" type="button" data-detail-refresh="${escapeHtml(character.id)}">↻ 정보 갱신</button></div></aside><section class="ability-panel"><h3>어빌리티</h3><div class="ability-rows">${abilityRows}</div><div class="detail-note-wrap"><label for="detailCharacterNote">📝 캐릭터 메모</label><textarea id="detailCharacterNote" class="detail-note" maxlength="1200" placeholder="이 캐릭터의 목표, 계획, 메모를 자유롭게 입력하세요.">${escapeHtml(character.note || '')}</textarea></div></section><div class="detail-main"><div class="equipment-comparison">${renderUpgradeSummary(character)}${renderEquipmentPanel(character,'current')}${renderEquipmentPanel(character,'target')}</div><div class="detail-statusbar"><span>장비 및 심볼 정보는 이 브라우저에 저장됩니다.</span><span>아이콘을 눌러 편집</span></div></div></div>`;
     $('detailProgressToggle').addEventListener('change',e=>{character.progressEnabled=e.target.checked;character.updatedAt=new Date().toISOString();saveCharacters();showToast(e.target.checked?'이 캐릭터를 스펙업 진행도에 포함합니다.':'이 캐릭터를 스펙업 진행도에서 제외합니다.');});
     $('detailBody').querySelector('[data-detail-refresh]')?.addEventListener('click',e=>refreshCharacter(character.id,e.currentTarget));
     $('detailBody').querySelectorAll('[data-ability-grade]').forEach(select=>select.addEventListener('change',e=>{const i=Number(e.target.dataset.abilityGrade);character.ability[i].grade=e.target.value;character.ability[i].option='';character.updatedAt=new Date().toISOString();saveCharacters();renderDetail(character);}));
